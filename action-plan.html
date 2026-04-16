@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Action Plan - ITB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">ITB <span class="highlight">EcoCalc</span></h1>
+            <nav>
+                <a href="index.html" class="i18n" data-en="Home" data-es="Inicio">Home</a>
+                <a href="calculator.html" class="i18n" data-en="Calculator" data-es="Calculadora">Calculator</a>
+                <a href="action-plan.html" class="i18n active" data-en="Action Plan" data-es="Plan de Acción">Action Plan</a>
+                <button class="lang-btn" onclick="toggleLang()" id="langBtn">🇪🇸 Español</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="card hero-card center-text">
+            <span class="icon-huge">🚀</span>
+            <h2 class="i18n" data-en="Strategic Solutions & Energy Independence" data-es="Soluciones Estratégicas e Independencia Energética">Strategic Solutions & Energy Independence</h2>
+            <p class="i18n subtitle" style="margin-top: 15px;" data-en="Based on the high costs seen in ITB's invoices and the annual grid dependency of ~142,230 kWh, here is the roadmap to reduce consumption and mitigate 2026 inflation." data-es="Basado en los altos costes del ITB y la dependencia eléctrica anual de ~142.230 kWh, este es el plan para reducir el consumo y mitigar la inflación de 2026.">Based on the high costs seen in ITB's invoices and the annual grid dependency of ~142,230 kWh, here is the roadmap to reduce consumption and mitigate 2026 inflation.</p>
+        </div>
+
+        <h3 class="section-title i18n" data-en="🎯 Concrete Actions & Energy" data-es="🎯 Acciones Concretas y Energía">🎯 Concrete Actions & Energy</h3>
+        
+        <div class="grid-3">
+            <div class="action-item">
+                <div class="action-icon" style="background: #fef3c7; color: #d97706;">☀️</div>
+                <h4 class="i18n" data-en="Solar Panels Expansion" data-es="Expansión Placas Solares">Solar Panels Expansion</h4>
+                <p class="text-small i18n" data-en="Currently consuming ~142k kWh/year. Increasing solar capacity by 20% will drastically reduce grid reliance." data-es="Consumo actual de ~142k kWh/año. Aumentar la capacidad solar un 20% reducirá drásticamente la dependencia de la red.">Currently consuming ~142k kWh/year. Increasing solar capacity by 20% will drastically reduce grid reliance.</p>
+                <span class="impact-badge impact-high i18n" data-en="High Financial Impact" data-es="Alto Impacto Financiero">High Financial Impact</span>
+            </div>
+
+            <div class="action-item">
+                <div class="action-icon" style="background: #f0fdf4; color: #15803d;">☁️</div>
+                <h4 class="i18n" data-en="Paperless Migration" data-es="Migración Cero Papel">Paperless Migration</h4>
+                <p class="text-small i18n" data-en="Total digitalization of exams via Moodle/Drive and switch to refillable whiteboard markers to combat IPC inflation." data-es="Digitalización total de exámenes vía Moodle/Drive y cambio a rotuladores recargables para combatir la inflación.">Total digitalization of exams via Moodle/Drive and switch to refillable whiteboard markers to combat IPC inflation.</p>
+                <span class="impact-badge impact-med i18n" data-en="Medium Eco Impact" data-es="Impacto Eco Medio">Medium Eco Impact</span>
+            </div>
+
+            <div class="action-item">
+                <div class="action-icon" style="background: #eff6ff; color: #1d4ed8;">💧</div>
+                <h4 class="i18n" data-en="Water Optimization" data-es="Optimización de Agua">Water Optimization</h4>
+                <p class="text-small i18n" data-en="Sensors show morning peaks of up to 500L/hr. Install timed push-buttons and leak-detection sensors." data-es="Los sensores muestran picos matutinos de 500L/h. Instalar pulsadores temporizados y sensores de fugas.">Sensors show morning peaks of up to 500L/hr. Install timed push-buttons and leak-detection sensors.</p>
+                <span class="impact-badge impact-high i18n" data-en="High Eco Impact" data-es="Alto Impacto Eco">High Eco Impact</span>
+            </div>
+        </div>
+
+        <h3 class="section-title i18n" style="margin-top: 40px;" data-en="♻️ Circular Economy Applied" data-es="♻️ Economía Circular Aplicada">♻️ Circular Economy Applied</h3>
+        
+        <div class="grid-2">
+            <div class="action-item">
+                <div class="action-icon" style="background: #f3e8ff; color: #6d28d9;">🔧</div>
+                <h4 class="i18n" data-en="IT Hardware Repair" data-es="Reparación Hardware IT">IT Hardware Repair</h4>
+                <p class="text-small i18n" data-en="Invoices show >3,000€ spent on replacing obsolete circuits. Train IT students to repair and maintain older hardware (Repair principle)." data-es="Facturas de >3.000€ en reemplazar circuitos. Formar a alumnos para reparar hardware antiguo (Principio de Reparación).">Invoices show >3,000€ spent on replacing obsolete circuits. Train IT students to repair and maintain older hardware (Repair principle).</p>
+            </div>
+
+            <div class="action-item">
+                <div class="action-icon" style="background: #ecfdf5; color: #047857;">✨</div>
+                <h4 class="i18n" data-en="Sustainable Cleaning" data-es="Limpieza Sostenible">Sustainable Cleaning</h4>
+                <p class="text-small i18n" data-en="Switch to high-efficiency hand dryers to eliminate paper waste. Negotiate a deposit-return system for 5L soap jugs." data-es="Secadores de aire de alta eficiencia para eliminar papel. Negociar sistema de retorno para garrafas de jabón de 5L.">Switch to high-efficiency hand dryers to eliminate paper waste. Negotiate a deposit-return system for 5L soap jugs.</p>
+            </div>
+        </div>
+
+        <h3 class="section-title i18n" style="margin-top: 40px;" data-en="📅 3-Year Implementation Roadmap" data-es="📅 Roadmap de Implementación (3 Años)">📅 3-Year Implementation Roadmap</h3>
+        
+        <div class="card">
+            <div class="timeline">
+                <div class="timeline-step">
+                    <div class="step-year i18n" data-en="Year 1 (Foundation)" data-es="Año 1 (Fundamentos)">Year 1 (Foundation)</div>
+                    <div class="step-content">
+                        <p class="i18n" data-en="Digitalization of 50% of administrative paper. Installation of water timed buttons in main bathrooms." data-es="Digitalización del 50% del papel administrativo. Instalación de pulsadores de agua en lavabos principales.">Digitalization of 50% of administrative paper. Installation of water timed buttons in main bathrooms.</p>
+                    </div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-year i18n" data-en="Year 2 (Expansion)" data-es="Año 2 (Expansión)">Year 2 (Expansion)</div>
+                    <div class="step-content">
+                        <p class="i18n" data-en="IT students start repairing obsolete circuits as part of curriculum. 100% LED lighting migration." data-es="Alumnos de IT comienzan a reparar circuitos como parte del temario. Migración 100% a iluminación LED.">IT students start repairing obsolete circuits as part of curriculum. 100% LED lighting migration.</p>
+                    </div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-year i18n" data-en="Year 3 (Consolidation)" data-es="Año 3 (Consolidación)">Year 3 (Consolidation)</div>
+                    <div class="step-content">
+                        <p class="i18n" data-en="Full circular economy with cleaning suppliers. +20% Solar panels installed. Reach the 30% reduction goal." data-es="Economía circular total con proveedores de limpieza. +20% Placas solares instaladas. Meta del 30% alcanzada.">Full circular economy with cleaning suppliers. +20% Solar panels installed. Reach the 30% reduction goal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <script src="js/app.js"></script>
+</body>
+</html>

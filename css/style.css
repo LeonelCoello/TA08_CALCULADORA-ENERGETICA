@@ -1,0 +1,221 @@
+/* VARIABLES GLOBALES */
+:root { 
+    --primary: #059669; 
+    --primary-light: #d1fae5; 
+    --primary-dark: #047857;
+    --dark: #111827; 
+    --gray: #4b5563; 
+    --light-gray: #6b7280;
+    --bg: #f3f4f6; 
+    --card: #ffffff; 
+    --border: #e5e7eb; 
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+body { background: var(--bg); color: var(--dark); line-height: 1.6; }
+
+/* NAVBAR */
+.navbar { background: var(--card); border-bottom: 1px solid var(--border); position: sticky; top:0; z-index: 100; box-shadow: 0 1px 3px rgba(0,0,0,0.04);}
+.nav-container { max-width: 1150px; margin: auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;}
+.logo { font-size: 1.5rem; font-weight: 800; color: #1f2937; letter-spacing: -0.5px;}
+.highlight { color: var(--primary); }
+.nav-links { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center;}
+nav a { text-decoration: none; color: var(--gray); font-weight: 600; padding: 8px 14px; border-radius: 8px; font-size: 0.95rem; transition: all 0.2s;}
+nav a:hover { background: #f3f4f6; color: var(--dark); }
+nav a.active { background: var(--primary-light); color: var(--primary); }
+.lang-btn { background: white; border: 1px solid var(--border); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.05); transition: 0.2s; color: var(--dark);}
+.lang-btn:hover { background: #f9fafb; transform: translateY(-1px); box-shadow: 0 2px 4px rgba(0,0,0,0.05);}
+
+/* CONTENEDORES Y TARJETAS */
+.container { max-width: 1150px; margin: 40px auto; padding: 0 20px; }
+.card { background: var(--card); padding: 30px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03); margin-bottom: 25px; }
+.center-text { text-align: center; }
+
+/* 🟢 HOME "PRO" DESIGN 🟢 */
+.hero-pro { padding: 60px 30px !important; border-top: none !important; background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); position: relative; overflow: hidden; }
+.hero-logo { max-width: 260px; margin: 0 auto 25px auto; display: block; position: relative; z-index: 2;}
+.gradient-text { font-size: 2.2rem; font-weight: 800; background: linear-gradient(90deg, #059669, #2563eb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; letter-spacing: -0.5px;}
+.subtitle { color: var(--light-gray); font-size: 1.1rem; max-width: 800px; margin: 0 auto 35px auto; line-height: 1.7; position: relative; z-index: 2;}
+.data-sources { display: flex; justify-content: center; gap: 15px; margin: 0 0 40px 0; flex-wrap: wrap; position: relative; z-index: 2;}
+.pro-pill { background: #ffffff; padding: 10px 22px; border-radius: 999px; border: 1px solid #e2e8f0; font-size: 0.95rem; font-weight: 600; color: var(--dark); display: flex; align-items: center; gap: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: default; }
+.pro-pill:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-color: #cbd5e1; }
+.pro-pill .emoji { font-size: 1.2rem; }
+.btn-glow { display: inline-block; background: var(--primary); color: white; border: none; padding: 16px 40px; border-radius: 12px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s; box-shadow: 0 10px 15px -3px rgba(5, 150, 105, 0.3); text-decoration: none; position: relative; z-index: 2; }
+.btn-glow:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 15px 25px -5px rgba(5, 150, 105, 0.4); }
+
+/* CALCULADORA */
+.dashboard-layout { display: grid; grid-template-columns: 360px 1fr; gap: 25px; }
+.input-group { margin-bottom: 18px; }
+.input-group label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px; color: var(--gray); }
+.input-group input, .input-group select { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem; outline: none; transition: border-color 0.2s; background: #fff;}
+.input-group input:focus, .input-group select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light);}
+
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+.grid-2-mini { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+.special-box { padding: 18px; border-radius: 10px; }
+.warning-box { background: #fffbeb; border: 1px dashed #f59e0b; }
+.info-box { background: #eff6ff; border: 1px dashed #3b82f6; }
+
+/* MICRO-TOGGLES INTERACTIVOS */
+.micro-toggles-interactive { display: flex; flex-direction: column; gap: 8px; }
+.micro-row { display: flex; align-items: center; justify-content: space-between; background: white; padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 0.85rem; font-weight: 600; color: var(--dark); transition: 0.2s;}
+.micro-row:hover { border-color: var(--primary); }
+.micro-row input[type="number"] { width: 60px !important; padding: 4px 8px !important; text-align: right; border: 1px solid #e2e8f0 !important; border-radius: 4px; font-weight: bold; background: #f8fafc !important;}
+.micro-row input[type="number"]:focus { border-color: var(--primary) !important; background: white !important;}
+
+.label-span { flex: 1; margin-right: 10px; line-height: 1.3;}
+
+/* Interruptor (Toggle Switch) */
+.toggle-row { background: #f8fafc; border-color: #cbd5e1; padding: 10px 12px;}
+.switch { position: relative; display: inline-block; width: 44px; height: 24px; margin: 0; flex-shrink: 0;}
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .4s; border-radius: 24px;}
+.slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; box-shadow: 0 1px 2px rgba(0,0,0,0.2);}
+input:checked + .slider { background-color: var(--primary); }
+input:focus + .slider { box-shadow: 0 0 1px var(--primary); }
+input:checked + .slider:before { transform: translateX(20px); }
+
+/* IPC Inteligente */
+.ipc-container { display: flex; flex-direction: column; gap: 8px; }
+.ipc-row { display: flex; align-items: center; justify-content: space-between; background: #ffffff; padding: 8px 12px; border-radius: 8px; border: 1px solid #bfdbfe; }
+.year-input { width: 75px !important; border: none !important; background: transparent !important; font-weight: 800; color: #4338ca; padding: 0 !important; font-size: 0.95rem;}
+.arrow-icon { color: #93c5fd; font-size: 0.9rem; }
+.percent-wrapper { display: flex; align-items: center; background: #f8fafc; padding: 6px 10px; border-radius: 6px; border: 1px solid #e2e8f0; }
+.percent-wrapper input { width: 60px !important; border: none !important; background: transparent !important; text-align: right; font-weight: 700; padding: 0 5px 0 0 !important; font-size: 0.95rem; color: var(--dark);}
+
+/* Resultados y Gráfico */
+.res-box { background: #f8fafc; padding: 20px; border-radius: 10px; border: 1px solid #e2e8f0; border-left: 6px solid var(--primary); font-variant-numeric: tabular-nums; }
+.res-box strong { font-size: 0.8rem; color: var(--light-gray); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 8px; font-weight: 700;}
+.chart-box { position: relative; height: 350px; width: 100%; padding: 20px;}
+
+.btn-pdf { background: #1e293b; color: white; border: none; padding: 16px 20px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 1.05rem; width: 100%; margin-top: 15px;}
+.btn-pdf:hover { background: #0f172a; box-shadow: 0 4px 6px rgba(0,0,0,0.1);}
+
+/* Tablas */
+.table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 8px; border: 1px solid var(--border);}
+.styled-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; min-width: 650px;}
+.styled-table th, .styled-table td { border-bottom: 1px solid var(--border); padding: 14px 15px; text-align: left; }
+.styled-table th { background-color: #f8fafc; font-weight: 700; color: var(--dark); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px;}
+
+
+/* =========================================
+   🟢 IMPRESIÓN PDF NATIVA (SÚPER BLINDADA) 🟢
+   ========================================= */
+.print-only { display: none; }
+
+@media print {
+    @page { 
+        size: A4 portrait; 
+        margin: 15mm; 
+    }
+    
+    body, html { 
+        background: white !important; 
+        width: 100% !important; 
+        margin: 0 !important; 
+        padding: 0 !important;
+        font-size: 11px !important;
+    }
+
+    /* FORZAR COLORES: Esto intenta forzar al navegador a imprimir los fondos */
+    * {
+        -webkit-print-color-adjust: exact !important; 
+        print-color-adjust: exact !important; 
+        color-adjust: exact !important;
+    }
+
+    /* OCULTAR TODO LO QUE NO SEA RESULTADOS */
+    .params-panel, .navbar, .btn-pdf, .lang-btn, header { 
+        display: none !important; 
+    }
+    
+    /* Cabecera oficial visible y espaciada */
+    .print-only { 
+        display: block !important; 
+        text-align: center; 
+        margin-bottom: 30px !important; 
+    }
+    .print-header img { max-height: 50px; margin-bottom: 10px; }
+    .print-header h2 { color: #059669 !important; font-size: 22px; margin: 0; }
+    .print-header p { color: #6b7280 !important; font-size: 12px; margin-top: 5px; }
+    .print-header hr { border: 0; border-top: 2px solid #059669 !important; margin-top: 15px; }
+    
+    /* Contenedor principal 100% ancho */
+    .dashboard-layout { display: block !important; width: 100% !important; }
+    .results-area { width: 100% !important; display: block !important; }
+    
+    /* 🟢 REGLAS ANTI-SOLAPAMIENTO PARA EL GRÁFICO 🟢 */
+    .chart-box { 
+        position: relative !important;
+        height: 250px !important; /* Forzamos altura máxima */
+        width: 100% !important;
+        padding: 0 !important; 
+        margin-bottom: 40px !important; /* Espacio gigante abajo para que no pise nada */
+        break-inside: avoid !important; 
+        page-break-inside: avoid !important;
+        display: block !important;
+        overflow: hidden !important; /* Si sobra algo del canvas, se corta, pero no pisa */
+        border: none !important;
+        box-shadow: none !important;
+    }
+    
+    /* 🟢 CONTENEDORES DE RESULTADOS (Flexbox forzado) 🟢 */
+    .card { 
+        box-shadow: none !important; 
+        border: none !important; 
+        margin-bottom: 25px !important; 
+        padding: 0 !important;
+    }
+    
+    .grid-2 { 
+        display: flex !important; 
+        flex-wrap: wrap !important; 
+        gap: 15px !important; 
+        justify-content: space-between !important;
+        margin-bottom: 30px !important;
+    }
+
+    .res-box { 
+        width: 48% !important; /* Mitad de la hoja exacta */
+        margin-bottom: 15px !important; 
+        padding: 15px !important;
+        box-sizing: border-box !important;
+        break-inside: avoid !important; 
+        page-break-inside: avoid !important; 
+        background-color: #f8fafc !important;
+        border: 1px solid #e5e7eb !important;
+        border-left: 6px solid #059669 !important;
+    }
+    
+    /* 🟢 PROTEGER TABLA PREDICTIVA 🟢 */
+    #predictionTableContainer { 
+        break-inside: avoid !important; 
+        page-break-inside: avoid !important; 
+        margin-top: 20px !important;
+    }
+    .styled-table th { background-color: #f1f5f9 !important; border-bottom: 2px solid #cbd5e1 !important;}
+    .styled-table td { border-bottom: 1px solid #e2e8f0 !important; }
+}
+
+
+/* RESPONSIVE DESIGN AVANZADO (MÓVILES) */
+@media (max-width: 950px) { 
+    .dashboard-layout { grid-template-columns: 1fr; } 
+    .grid-3 { grid-template-columns: repeat(2, 1fr); } 
+}
+@media (max-width: 600px) { 
+    .nav-container { justify-content: center; text-align: center; flex-direction: column;}
+    .nav-links { flex-wrap: wrap; justify-content: center; gap: 8px;}
+    .container { margin-top: 20px; padding: 0 12px;}
+    .card { padding: 20px; }
+    body:not(.pdf-export-mode) .grid-2 { grid-template-columns: 1fr; } 
+    .chart-box { height: 250px; padding: 5px; }
+    .grid-3 { grid-template-columns: 1fr; }
+    .gradient-text { font-size: 1.6rem; }
+    .subtitle { font-size: 0.95rem; text-align: left;}
+    .data-sources { gap: 10px; }
+    .pro-pill { padding: 8px 16px; font-size: 0.85rem; width: 100%; justify-content: center;}
+    .btn-glow { width: 100%; padding: 14px; font-size: 1rem;}
+    .micro-row { font-size: 0.8rem; } 
+}
