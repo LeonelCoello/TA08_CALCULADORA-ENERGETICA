@@ -63,7 +63,7 @@ El sistema aplica una reducción escalonada para alcanzar el objetivo del usuari
 ---
 
 ## 👤 Autor
-Desarrollado por el equipo de Sostenibilidad ITB.
+Desarrollado por el equipo de Sostenibilidad ITB Oriol Coll y Leonel Coello.
 *Proyecto Académico - Institut Tecnològic de Barcelona.*
 
 ---
