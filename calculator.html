@@ -24,10 +24,11 @@
     <main class="container dashboard-layout">
         <aside class="card params-panel">
             <h3 class="i18n" data-en="1. Monthly Base Consumption" data-es="1. Consumo Base Mensual">1. Monthly Base Consumption</h3>
-            <div class="input-group"><label>⚡ kWh (Base)</label><input type="number" id="baseElec" value="16700" onchange="runCalculations()"></div>
-            <div class="input-group"><label>💧 Litres</label><input type="number" id="baseWater" value="150000" onchange="runCalculations()"></div>
-            <div class="input-group"><label>📎 Office €</label><input type="number" id="baseOffice" value="473" onchange="runCalculations()"></div>
-            <div class="input-group"><label>✨ Cleaning €</label><input type="number" id="baseClean" value="620" onchange="runCalculations()"></div>
+            
+            <div class="input-group"><label class="i18n" data-en="⚡ kWh (Base)" data-es="⚡ kWh (Base)">⚡ kWh (Base)</label><input type="number" id="baseElec" value="16700" onchange="runCalculations()"></div>
+            <div class="input-group"><label class="i18n" data-en="💧 Litres" data-es="💧 Litros">💧 Litres</label><input type="number" id="baseWater" value="150000" onchange="runCalculations()"></div>
+            <div class="input-group"><label class="i18n" data-en="📎 Office & Maint. €" data-es="📎 Oficina y Mant. €">📎 Office & Maint. €</label><input type="number" id="baseOffice" value="473" onchange="runCalculations()"></div>
+            <div class="input-group"><label class="i18n" data-en="✨ Clean. & Waste €" data-es="✨ Limpieza y Residuos €">✨ Clean. & Waste €</label><input type="number" id="baseClean" value="620" onchange="runCalculations()"></div>
 
             <div class="input-group special-box warning-box">
                 <label>💶 <span class="i18n highlight-bold" data-en="Energy & Water Tariffs" data-es="Tarifas de Luz y Agua">Energy & Water Tariffs</span></label>
@@ -73,52 +74,42 @@
                 <p style="font-size: 0.75rem; color: #64748b; margin-bottom: 10px; line-height: 1.3;" class="i18n" data-en="Toggle smart building systems." data-es="Ajusta los sistemas inteligentes del edificio.">Toggle smart building systems.</p>
                 
                 <div class="micro-toggles-interactive">
-                    
                     <div class="micro-row">
                         <span class="i18n" data-en="💡 LED Migration (%)" data-es="💡 Migración LED (%)">💡 LED Migration (%)</span>
                         <input type="number" id="opt-led" value="0" min="0" max="100" onchange="runCalculations()">
                     </div>
-                    
                     <div class="micro-row toggle-row">
                         <span class="i18n label-span" data-en="🚶 Motion Lights (10 WC)" data-es="🚶 Sensores Movimiento (10 Baños)">🚶 Motion Lights (10 WC)</span>
                         <label class="switch"><input type="checkbox" id="opt-motion" onchange="runCalculations()"><span class="slider round"></span></label>
                     </div>
-
                     <div class="micro-row toggle-row">
                         <span class="i18n label-span" data-en="🚰 Smart Faucets (10 WC)" data-es="🚰 Grifos Inteligentes (10 Baños)">🚰 Smart Faucets (10 WC)</span>
                         <label class="switch"><input type="checkbox" id="opt-water" onchange="runCalculations()"><span class="slider round"></span></label>
                     </div>
-
                     <div class="micro-row toggle-row" style="background: #e0f2fe; border-color: #7dd3fc;">
                         <span class="i18n label-span" data-en="🌧️ Rainwater Harvesting (-12% 💧)" data-es="🌧️ Agua de Lluvia (-12% 💧)" style="color: #0369a1; font-weight: 700;">🌧️ Rainwater Harvesting (-12% 💧)</span>
                         <label class="switch"><input type="checkbox" id="opt-rain" onchange="runCalculations()"><span class="slider round"></span></label>
                     </div>
-
                     <div class="micro-row toggle-row">
                         <span class="i18n label-span" data-en="🔥 Eco Heating (Nov-Feb)" data-es="🔥 Eco Calefacción (Nov-Feb)">🔥 Eco Heating (Nov-Feb)</span>
                         <label class="switch"><input type="checkbox" id="opt-heat" onchange="runCalculations()"><span class="slider round"></span></label>
                     </div>
-
                     <div class="micro-row toggle-row">
                         <span class="i18n label-span" data-en="❄️ Eco Cooling (May-Jun)" data-es="❄️ Eco Aire Acond. (May-Jun)">❄️ Eco Cooling (May-Jun)</span>
                         <label class="switch"><input type="checkbox" id="opt-cool" onchange="runCalculations()"><span class="slider round"></span></label>
                     </div>
-
                     <div class="micro-row toggle-row">
                         <span class="i18n label-span" data-en="💻 PC Sleep: Morning (8h-14h)" data-es="💻 Auto-Sleep PC: Mañana (8h-14h)">💻 PC Sleep: Morning (8h-14h)</span>
                         <label class="switch"><input type="checkbox" id="opt-it-am" onchange="runCalculations()"><span class="slider round"></span></label>
                     </div>
-
                     <div class="micro-row toggle-row">
                         <span class="i18n label-span" data-en="💻 PC Sleep: Afternoon (15h-21h)" data-es="💻 Auto-Sleep PC: Tarde (15h-21h)">💻 PC Sleep: Afternoon (15h-21h)</span>
                         <label class="switch"><input type="checkbox" id="opt-it-pm" onchange="runCalculations()"><span class="slider round"></span></label>
                     </div>
-
                     <div class="micro-row toggle-row" style="background: #e0e7ff; border-color: #a5b4fc;">
                         <span class="i18n label-span" data-en="🖧 Green IT: CPD Night Sleep (-5% ⚡)" data-es="🖧 Green IT: Apagado Noche CPD (-5% ⚡)" style="color: #4338ca; font-weight: 700;">🖧 Green IT: CPD Night Sleep (-5% ⚡)</span>
                         <label class="switch"><input type="checkbox" id="opt-cpd" onchange="runCalculations()"><span class="slider round"></span></label>
                     </div>
-
                 </div>
             </div>
 

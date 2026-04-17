@@ -64,8 +64,6 @@ function runCalculations() {
     const isCoolEco = document.getElementById('opt-cool') && document.getElementById('opt-cool').checked;
     const isItAm = document.getElementById('opt-it-am') && document.getElementById('opt-it-am').checked;
     const isItPm = document.getElementById('opt-it-pm') && document.getElementById('opt-it-pm').checked;
-    
-    // NUEVOS CONTROLES: GREEN IT & LLUVIA
     const isCpd = document.getElementById('opt-cpd') && document.getElementById('opt-cpd').checked;
     const isRain = document.getElementById('opt-rain') && document.getElementById('opt-rain').checked;
 
@@ -73,8 +71,8 @@ function runCalculations() {
     const ledFactor = 1.0 - ((ledVal / 100) * 0.12);
     const motionFactor = isMotion ? 0.98 : 1.0; 
     const smartWaterFactor = isWater ? 0.80 : 1.0; 
-    const cpdFactor = isCpd ? 0.95 : 1.0; // 5% (media de 4-6%) ahorro global de electricidad por Green IT
-    const rainFactor = isRain ? 0.88 : 1.0; // 12% ahorro global de agua por Recolección
+    const cpdFactor = isCpd ? 0.95 : 1.0; 
+    const rainFactor = isRain ? 0.88 : 1.0; 
 
     // Auto-Sleep IT
     let itFactor = 1.0;
@@ -95,8 +93,6 @@ function runCalculations() {
 
         if (profile === 'school_day') { 
             schoolDays++; 
-            
-            // Climatización Estacional
             if (m === 10 || m === 11 || m === 0 || m === 1) {
                 multE = isHeatEco ? 1.15 : 1.35; 
             } else if (m === 4 || m === 5) {
@@ -104,9 +100,7 @@ function runCalculations() {
             } else {
                 multE = 1.0;
             }
-
             multE *= itFactor; 
-
             if (m === 4 || m === 5 || m === 8) multW = 1.3; else multW = 1.0;
             
         } else if (profile === 'weekend') {
@@ -123,7 +117,7 @@ function runCalculations() {
         baseO += dailyO * multO;
         baseC += dailyC * multC;
 
-        // Cálculos con las reducciones (CPD y Rain integrados)
+        // Cálculos con las reducciones
         let dE = dailyE * multE * reduce * solarFactor * ledFactor * motionFactor * cpdFactor;
         let dW = dailyW * multW * reduce * smartWaterFactor * rainFactor;
         let dO = dailyO * multO * reduce * cloudFactor; 
@@ -144,9 +138,10 @@ function runCalculations() {
     if (timeScale === 'month') { divY = 12; divS = 10; suffix = currentLang==='en'?" /mo":" /mes"; }
     if (timeScale === 'day') { divY = 365; divS = schoolDays; suffix = currentLang==='en'?" /day":" /día"; }
 
+    // 🟢 ETIQUETAS ACTUALIZADAS (RÚBRICA) 🟢
     const labels = currentLang === 'en' ? 
-        { eY: "Electricity (Annual)", eS: "Electricity (Sept-Jul)", wY: "Water (Annual)", wS: "Water (Sept-Jul)", oY: "Office (Annual)", oS: "Office (Sept-Jul)", cY: "Cleaning (Annual)", cS: "Cleaning (Sept-Jul)" } :
-        { eY: "Electricidad (Anual)", eS: "Electricidad (Set-Jul)", wY: "Agua (Anual)", wS: "Agua (Set-Jul)", oY: "Oficina (Anual)", oS: "Oficina (Set-Jul)", cY: "Limpieza (Anual)", cS: "Limpieza (Set-Jul)" };
+        { eY: "Electricity (Annual)", eS: "Electricity (Sept-Jul)", wY: "Water (Annual)", wS: "Water (Sept-Jul)", oY: "Office & Maint. (Annual)", oS: "Office & Maint. (Sept-Jul)", cY: "Clean. & Waste (Annual)", cS: "Clean. & Waste (Sept-Jul)" } :
+        { eY: "Electricidad (Anual)", eS: "Electricidad (Set-Jul)", wY: "Agua (Anual)", wS: "Agua (Set-Jul)", oY: "Oficina y Mant. (Anual)", oS: "Oficina y Mant. (Set-Jul)", cY: "Limpieza y Residuos (Anual)", cS: "Limpieza y Residuos (Set-Jul)" };
 
     document.getElementById('resultsGrid').innerHTML = `
         <div class="res-box"><strong>${labels.eY}</strong><br>${formatNum(totals.yearE/divY)} kWh${suffix}</div>
@@ -199,6 +194,10 @@ function renderPredictionTable(bE, bW, bO, bC, targetRed, solarF, cloudF, ledF, 
     const costO3 = bO * r3 * cloudF * i3;
     const costC3 = bC * r3 * i3;
 
+    // 🟢 ETIQUETAS ACTUALIZADAS PARA LA TABLA 🟢
+    const thOffice = currentLang === 'en' ? "📎 Office & Maint. (€)" : "📎 Ofic. y Mant. (€)";
+    const thClean = currentLang === 'en' ? "✨ Clean & Waste (€)" : "✨ Limp. y Residuos (€)";
+
     tableContainer.innerHTML = `
         <table class="styled-table" style="width: 100%; font-variant-numeric: tabular-nums;">
             <thead>
@@ -206,8 +205,8 @@ function renderPredictionTable(bE, bW, bO, bC, targetRed, solarF, cloudF, ledF, 
                     <th>${currentLang === 'en' ? "Year" : "Año"}</th>
                     <th style="color: #d97706;">⚡ Elec. (€)</th>
                     <th style="color: #2563eb;">💧 Water (€)</th>
-                    <th style="color: #4b5563;">📎 Office (€)</th>
-                    <th style="color: #4b5563;">✨ Clean (€)</th>
+                    <th style="color: #4b5563;">${thOffice}</th>
+                    <th style="color: #4b5563;">${thClean}</th>
                     <th style="background: #1f2937; color: white;">💰 Total (€)</th>
                 </tr>
             </thead>
@@ -271,7 +270,10 @@ function exportToPDF() {
     const dateElement = document.getElementById('printDate');
     const datePrefix = currentLang === 'en' ? 'Date: ' : 'Fecha: ';
     dateElement.innerText = datePrefix + new Date().toLocaleDateString();
-    window.print();
+    
+    setTimeout(() => {
+        window.print();
+    }, 500);
 }
 
 window.onload = () => { 
