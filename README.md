@@ -5,12 +5,18 @@
 [![Software Version](https://img.shields.io/badge/Version-3.1.0_Enterprise-059669.svg)](#)
 [![Stack](https://img.shields.io/badge/Stack-Vanilla_JS_/_CSS3_/_HTML5-blue.svg)](#)
 [![Compliance](https://img.shields.io/badge/Rubric-100%25_Verified-success.svg)](#)
-[![Deployment](https://img.shields.io/badge/Mobile-Responsive_Ready-orange.svg)](#)
+[![Deployment](https://img.shields.io/badge/Live-Demo_Online-orange.svg)](https://leonelcoello.github.io/TA08_CALCULADORA-ENERGETICA/index.html)
 
 ## 🎯 Executive Summary
 **ITB EcoCalc** is a high-fidelity **Digital Twin Simulation Platform** engineered for the *Institut Tecnològic de Barcelona*. Unlike traditional static calculators, this engine executes a **365-day iterative loop** to forecast environmental and financial impact by cross-referencing real utility billing data, IoT sensor profiles, and strategic infrastructure upgrades.
 
 The platform bridges the gap between raw environmental data and executive financial decision-making, providing a 3-year roadmap aligned with **Circular Economy** principles and Spanish **IPC (Consumer Price Index)** fluctuations.
+
+---
+
+## 🌐 Live Deployment
+The application is hosted and fully functional at the following URL:
+🔗 **[https://leonelcoello.github.io/TA08_CALCULADORA-ENERGETICA/index.html](https://leonelcoello.github.io/TA08_CALCULADORA-ENERGETICA/index.html)**
 
 ---
 
@@ -56,11 +62,6 @@ Users can interactively parameterize the institute's physical infrastructure:
 * **Bespoke Print Engine:** A custom `@media print` CSS layer engineered to prevent data clipping.
     * *Asynchronous Re-scaling:* The system utilizes a JS-controlled delay to re-render charts for DINA4 high-fidelity PDF output.
     * *Vector Integrity:* All UI elements maintain 1:1 scale during PDF generation.
-
-### Development Stack
-* **Frontend:** Semantic HTML5, CSS3 Custom Properties (Variables).
-* **Logic:** Functional Vanilla JavaScript (ES6+).
-* **Data Vis:** Chart.js Library.
 
 ---
 
