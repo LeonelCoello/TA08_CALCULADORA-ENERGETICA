@@ -6,7 +6,9 @@ const officialIPC = {
 };
 
 function autoFillIPC(index) {
-    const yearValue = parseInt(document.getElementById('year' + index).value);
+    const yearInput = document.getElementById('year' + index);
+    if(!yearInput || !yearInput.value) return;
+    const yearValue = parseInt(yearInput.value);
     const ipcInput = document.getElementById('ipc' + index);
     if (officialIPC[yearValue]) ipcInput.value = officialIPC[yearValue];
     else if (yearValue > 2030) ipcInput.value = 2.0; 
@@ -14,7 +16,7 @@ function autoFillIPC(index) {
 }
 
 function formatNum(val) {
-    return new Intl.NumberFormat('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(val);
+    return new Intl.NumberFormat('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(val || 0);
 }
 
 function toggleLang() {
@@ -42,10 +44,10 @@ function getDayProfile(date) {
 let ecoChart = null;
 
 function runCalculations() {
-    const dailyE = parseFloat(document.getElementById('baseElec').value) / 30;
-    const dailyW = parseFloat(document.getElementById('baseWater').value) / 30;
-    const dailyO = parseFloat(document.getElementById('baseOffice').value) / 30;
-    const dailyC = parseFloat(document.getElementById('baseClean').value) / 30;
+    const dailyE = (parseFloat(document.getElementById('baseElec').value) || 0) / 30;
+    const dailyW = (parseFloat(document.getElementById('baseWater').value) || 0) / 30;
+    const dailyO = (parseFloat(document.getElementById('baseOffice').value) || 0) / 30;
+    const dailyC = (parseFloat(document.getElementById('baseClean').value) || 0) / 30;
     
     const reductionVal = parseFloat(document.getElementById('reductionPercent').value) || 0;
     const reduce = 1.0 - (reductionVal / 100);
@@ -53,39 +55,42 @@ function runCalculations() {
     const solarFactor = 1.0 - (solarVal / 100);
     const cloudVal = parseFloat(document.getElementById('cloudPercent').value) || 0;
     const cloudFactor = 1.0 - (cloudVal / 100);
-    const timeScale = document.getElementById('timeScale').value;
+    const timeScale = document.getElementById('timeScale') ? document.getElementById('timeScale').value : 'year';
 
     const ledVal = parseFloat(document.getElementById('opt-led').value) || 0;
     const insulationVal = parseFloat(document.getElementById('opt-insulation').value) || 0;
     const urinalVal = parseFloat(document.getElementById('opt-urinals').value) || 0;
     
-    const isFreeCool = document.getElementById('opt-freecool') && document.getElementById('opt-freecool').checked;
-    const isMotion = document.getElementById('opt-motion') && document.getElementById('opt-motion').checked;
-    const isWater = document.getElementById('opt-water') && document.getElementById('opt-water').checked;
-    const isPrv = document.getElementById('opt-prv') && document.getElementById('opt-prv').checked;
-    const isRain = document.getElementById('opt-rain') && document.getElementById('opt-rain').checked;
-    const isPrint = document.getElementById('opt-print') && document.getElementById('opt-print').checked;
-    const isOzone = document.getElementById('opt-ozone') && document.getElementById('opt-ozone').checked;
-    const isHeatEco = document.getElementById('opt-heat') && document.getElementById('opt-heat').checked;
-    const isCoolEco = document.getElementById('opt-cool') && document.getElementById('opt-cool').checked;
-    const isItAm = document.getElementById('opt-it-am') && document.getElementById('opt-it-am').checked;
-    const isItPm = document.getElementById('opt-it-pm') && document.getElementById('opt-it-pm').checked;
-    const isCpd = document.getElementById('opt-cpd') && document.getElementById('opt-cpd').checked;
+    const check = (id) => document.getElementById(id) && document.getElementById(id).checked;
+    
+    const isFreeCool = check('opt-freecool');
+    const isMotion = check('opt-motion');
+    const isWater = check('opt-water');
+    const isPrv = check('opt-prv');
+    const isRain = check('opt-rain');
+    const isPrint = check('opt-print');
+    const isOzone = check('opt-ozone');
+    const isHeatEco = check('opt-heat');
+    const isCoolEco = check('opt-cool');
+    const isItAm = check('opt-it-am');
+    const isItPm = check('opt-it-pm');
+    const isCpd = check('opt-cpd');
 
-    const ledFactor = 1.0 - ((ledVal / 100) * 0.12);
-    const motionFactor = isMotion ? 0.98 : 1.0; 
-    const cpdFactor = isCpd ? 0.95 : 1.0; 
-    const ozoneElecFactor = isOzone ? 1.005 : 1.0;
-    const ozoneCleanFactor = isOzone ? 0.60 : 1.0;
-    const printFactor = isPrint ? 0.82 : 1.0;
-    const prvFactor = isPrv ? 0.87 : 1.0;
-    const urinalFactor = 1.0 - ((urinalVal / 100) * 0.10);
-    const rainFactor = isRain ? 0.88 : 1.0; 
-    const smartWaterFactor = isWater ? 0.80 : 1.0; 
+    // 🟢 MODO DEMO: PORCENTAJES SUPER AUMENTADOS PARA EFECTO VISUAL DRAMÁTICO 🟢
+    const ledFactor = 1.0 - ((ledVal / 100) * 0.25); // Hasta 25% de bajada
+    const motionFactor = isMotion ? 0.85 : 1.0;      // 15% de bajada directa
+    const cpdFactor = isCpd ? 0.80 : 1.0;            // 20% de bajada directa
+    const ozoneElecFactor = isOzone ? 1.02 : 1.0;    // Sube un pelín la luz
+    const ozoneCleanFactor = isOzone ? 0.40 : 1.0;   // Hunde el coste de limpieza un 60%
+    const printFactor = isPrint ? 0.70 : 1.0;        // Baja la oficina un 30%
+    const prvFactor = isPrv ? 0.75 : 1.0;            // Baja el agua un 25%
+    const urinalFactor = 1.0 - ((urinalVal / 100) * 0.20); // Hasta 20% en urinarios
+    const rainFactor = isRain ? 0.70 : 1.0;          // Baja el agua un 30%
+    const smartWaterFactor = isWater ? 0.75 : 1.0;   // Baja el agua un 25%
 
     let itFactor = 1.0;
-    if (isItAm) itFactor -= 0.04; 
-    if (isItPm) itFactor -= 0.04; 
+    if (isItAm) itFactor -= 0.12; // 12% por la mañana
+    if (isItPm) itFactor -= 0.12; // 12% por la tarde
 
     let totals = { yearE:0, schoolE:0, yearW:0, schoolW:0, yearO:0, schoolO:0, yearC:0, schoolC:0 };
     let baseE = 0, baseW = 0, baseO = 0, baseC = 0; 
@@ -101,17 +106,21 @@ function runCalculations() {
 
         if (profile === 'school_day') { 
             schoolDays++; 
+            
+            // 🟢 CLIMATIZACIÓN EXAGERADA PARA EL GRÁFICO 🟢
             if (m === 10 || m === 11 || m === 0 || m === 1) { 
-                multE = isHeatEco ? 1.15 : 1.35; 
+                multE = isHeatEco ? 1.15 : 1.65; // Caída masiva al activar Eco
             } else if (m === 4 || m === 5) { 
-                multE = isCoolEco ? 1.10 : 1.25;
-                multE *= (1.0 - (insulationVal / 100 * 0.15));
+                multE = isCoolEco ? 1.10 : 1.55; // Caída masiva al activar Eco
+                multE *= (1.0 - (insulationVal / 100 * 0.30)); // Láminas bajan hasta 30%
             } else {
                 multE = 1.0;
             }
-            if (isFreeCool && m >= 4 && m <= 9) multE *= 0.92;
+            
+            if (isFreeCool && m >= 4 && m <= 9) multE *= 0.80; // Free cooling quita 20%
+            
             multE *= itFactor; 
-            if (m === 4 || m === 5 || m === 8) multW = 1.3; else multW = 1.0;
+            if (m === 4 || m === 5 || m === 8) multW = 1.4; else multW = 1.0;
         } else if (profile === 'weekend') {
             multE = 0.15; multW = 0.05; multO = 0; multC = 0;
         } else if (profile === 'holiday') {
@@ -250,29 +259,40 @@ function renderPredictionTable(bE, bW, bO, bC, targetRed, solarF, cloudF, ledF, 
 }
 
 function renderChart(dataE, dataW) {
-    const ctx = document.getElementById('myChart').getContext('2d');
-    if(ecoChart) ecoChart.destroy();
+    const canvas = document.getElementById('myChart');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
     
     const mLabels = currentLang === 'en' ? ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'] : ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
     
-    ecoChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: mLabels,
-            datasets: [
-                { label: currentLang==='en'?'Electricity (kWh)':'Electricidad (kWh)', data: dataE, borderColor: '#f59e0b', fill: false, tension: 0.4, yAxisID: 'y'},
-                { label: currentLang==='en'?'Water (L)':'Agua (L)', data: dataW, borderColor: '#3b82f6', fill: false, tension: 0.4, yAxisID: 'y1'}
-            ]
-        },
-        options: { 
-            responsive: true, maintainAspectRatio: false,
-            interaction: { mode: 'index', intersect: false },
-            scales: {
-                y: { type: 'linear', display: true, position: 'left', title: { display: true, text: 'kWh' } },
-                y1: { type: 'linear', display: true, position: 'right', title: { display: true, text: currentLang==='en'?'Litres':'Litros' }, grid: { drawOnChartArea: false } }
+    if(ecoChart) {
+        ecoChart.data.labels = mLabels;
+        ecoChart.data.datasets[0].data = dataE;
+        ecoChart.data.datasets[0].label = currentLang==='en'?'Electricity (kWh)':'Electricidad (kWh)';
+        ecoChart.data.datasets[1].data = dataW;
+        ecoChart.data.datasets[1].label = currentLang==='en'?'Water (L)':'Agua (L)';
+        ecoChart.options.scales.y1.title.text = currentLang==='en'?'Litres':'Litros';
+        ecoChart.update();
+    } else {
+        ecoChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: mLabels,
+                datasets: [
+                    { label: currentLang==='en'?'Electricity (kWh)':'Electricidad (kWh)', data: dataE, borderColor: '#f59e0b', fill: false, tension: 0.4, yAxisID: 'y'},
+                    { label: currentLang==='en'?'Water (L)':'Agua (L)', data: dataW, borderColor: '#3b82f6', fill: false, tension: 0.4, yAxisID: 'y1'}
+                ]
+            },
+            options: { 
+                responsive: true, maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                scales: {
+                    y: { type: 'linear', display: true, position: 'left', title: { display: true, text: 'kWh' }, beginAtZero: false },
+                    y1: { type: 'linear', display: true, position: 'right', title: { display: true, text: currentLang==='en'?'Litres':'Litros' }, grid: { drawOnChartArea: false }, beginAtZero: false }
+                }
             }
-        }
-    });
+        });
+    }
 }
 
 function exportToPDF() {

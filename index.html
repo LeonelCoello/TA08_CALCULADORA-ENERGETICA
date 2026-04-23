@@ -25,16 +25,16 @@
         <aside class="left-panel">
             <div class="card params-panel">
                 <h3 class="i18n" data-en="1. Monthly Base Consumption" data-es="1. Consumo Base Mensual">1. Monthly Base Consumption</h3>
-                <div class="input-group"><label class="i18n" data-en="⚡ kWh (Base)" data-es="⚡ kWh (Base)">⚡ kWh (Base)</label><input type="number" id="baseElec" value="16700" onchange="runCalculations()"></div>
-                <div class="input-group"><label class="i18n" data-en="💧 Litres" data-es="💧 Litros">💧 Litres</label><input type="number" id="baseWater" value="150000" onchange="runCalculations()"></div>
-                <div class="input-group"><label class="i18n" data-en="📎 Office & Maint. €" data-es="📎 Oficina y Mant. €">📎 Office & Maint. €</label><input type="number" id="baseOffice" value="473" onchange="runCalculations()"></div>
-                <div class="input-group"><label class="i18n" data-en="✨ Clean. & Waste €" data-es="✨ Limpieza y Residuos €">✨ Clean. & Waste €</label><input type="number" id="baseClean" value="620" onchange="runCalculations()"></div>
+                <div class="input-group"><label class="i18n" data-en="⚡ kWh (Base)" data-es="⚡ kWh (Base)">⚡ kWh (Base)</label><input type="number" id="baseElec" value="16700" oninput="runCalculations()"></div>
+                <div class="input-group"><label class="i18n" data-en="💧 Litres" data-es="💧 Litros">💧 Litres</label><input type="number" id="baseWater" value="150000" oninput="runCalculations()"></div>
+                <div class="input-group"><label class="i18n" data-en="📎 Office & Maint. €" data-es="📎 Oficina y Mant. €">📎 Office & Maint. €</label><input type="number" id="baseOffice" value="473" oninput="runCalculations()"></div>
+                <div class="input-group"><label class="i18n" data-en="✨ Clean. & Waste €" data-es="✨ Limpieza y Residuos €">✨ Clean. & Waste €</label><input type="number" id="baseClean" value="620" oninput="runCalculations()"></div>
 
                 <div class="input-group special-box warning-box" style="margin-top:15px;">
                     <label>💶 <span class="i18n highlight-bold" data-en="Energy & Water Tariffs" data-es="Tarifas de Luz y Agua">Energy & Water Tariffs</span></label>
                     <div class="grid-2-mini">
-                        <div><small>€ / kWh</small><input type="number" id="tariffElec" value="0.15" step="0.01" onchange="runCalculations()"></div>
-                        <div><small>€ / Litre</small><input type="number" id="tariffWater" value="0.002" step="0.001" onchange="runCalculations()"></div>
+                        <div><small>€ / kWh</small><input type="number" id="tariffElec" value="0.15" step="0.01" oninput="runCalculations()"></div>
+                        <div><small>€ / Litre</small><input type="number" id="tariffWater" value="0.002" step="0.001" oninput="runCalculations()"></div>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                     <div style="display: flex; align-items: center; background: #ffffff; padding: 6px 12px; border-radius: 6px; border: 1px solid #fde68a;">
                         <span style="font-size: 0.85rem; color: #b45309; font-weight: bold;" class="i18n" data-en="Capacity Increase:" data-es="Aumento Capacidad:">Capacity Increase:</span>
                         <div class="percent-wrapper" style="margin-left: auto;">
-                            <input type="number" id="solarPercent" value="20" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99;" onchange="runCalculations()" style="color: #b45309; width: 60px;"><span>%</span>
+                            <input type="number" id="solarPercent" value="20" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99; runCalculations();" style="color: #b45309; width: 60px;"><span>%</span>
                         </div>
                     </div>
                 </div>
@@ -58,14 +58,14 @@
                     <div style="display: flex; align-items: center; background: #ffffff; padding: 6px 12px; border-radius: 6px; border: 1px solid #bbf7d0;">
                         <span style="font-size: 0.85rem; color: #15803d; font-weight: bold;" class="i18n" data-en="Target Reduction:" data-es="Reducción Objetivo:">Target Reduction:</span>
                         <div class="percent-wrapper" style="margin-left: auto;">
-                            <input type="number" id="cloudPercent" value="15" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99;" onchange="runCalculations()" style="color: #15803d; width: 60px;"><span>%</span>
+                            <input type="number" id="cloudPercent" value="15" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99; runCalculations();" style="color: #15803d; width: 60px;"><span>%</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="input-group" style="background: var(--primary-light); padding: 15px; border-radius: 8px;">
                     <label>🎯 <span class="i18n highlight-bold" data-en="General Reduction Goal (%)" data-es="Objetivo General Reducción (%)">General Reduction Goal (%)</span></label>
-                    <input type="number" id="reductionPercent" value="30" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99;" onchange="runCalculations()">
+                    <input type="number" id="reductionPercent" value="30" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99; runCalculations();">
                 </div>
             </div>
         </aside>
@@ -98,13 +98,13 @@
                 <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 15px; line-height: 1.4;" class="i18n" data-en="Configure smart building parameters and watch the chart update." data-es="Configura los parámetros del edificio inteligente y observa el gráfico.">Configure smart building parameters and watch the chart update.</p>
                 
                 <div class="micro-toggles-interactive">
-                    <div class="micro-row"><span class="i18n" data-en="💡 LED Migration (%)" data-es="💡 Migración LED (%)">💡 LED Migration (%)</span><input type="number" id="opt-led" value="0" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99;" onchange="runCalculations()"></div>
-                    <div class="micro-row"><span class="i18n" data-en="🌡️ Passive Insulation (%)" data-es="🌡️ Láminas Solares (%)">🌡️ Passive Insulation (%)</span><input type="number" id="opt-insulation" value="0" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99;" onchange="runCalculations()"></div>
+                    <div class="micro-row"><span class="i18n" data-en="💡 LED Migration (%)" data-es="💡 Migración LED (%)">💡 LED Migration (%)</span><input type="number" id="opt-led" value="0" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99; runCalculations();"></div>
+                    <div class="micro-row"><span class="i18n" data-en="🌡️ Passive Insulation (%)" data-es="🌡️ Láminas Solares (%)">🌡️ Passive Insulation (%)</span><input type="number" id="opt-insulation" value="0" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99; runCalculations();"></div>
                     <div class="micro-row toggle-row"><span class="i18n label-span" data-en="🌀 Night Free Cooling" data-es="🌀 Free Cooling Nocturno">🌀 Night Free Cooling</span><label class="switch"><input type="checkbox" id="opt-freecool" onchange="runCalculations()"><span class="slider round"></span></label></div>
                     <div class="micro-row toggle-row"><span class="i18n label-span" data-en="🚶 Motion Lights (WC)" data-es="🚶 Sensores Movimiento">🚶 Motion Lights (WC)</span><label class="switch"><input type="checkbox" id="opt-motion" onchange="runCalculations()"><span class="slider round"></span></label></div>
                     <div class="micro-row toggle-row"><span class="i18n label-span" data-en="🚰 Smart Faucets" data-es="🚰 Grifos Inteligentes">🚰 Smart Faucets</span><label class="switch"><input type="checkbox" id="opt-water" onchange="runCalculations()"><span class="slider round"></span></label></div>
                     <div class="micro-row toggle-row"><span class="i18n label-span" data-en="📉 PRV Valve (3 Bars)" data-es="📉 Reductora Presión (3B)">📉 PRV Valve (3 Bars)</span><label class="switch"><input type="checkbox" id="opt-prv" onchange="runCalculations()"><span class="slider round"></span></label></div>
-                    <div class="micro-row"><span class="i18n" data-en="🚽 Waterless Urinals (%)" data-es="🚽 Urinarios Secos (%)">🚽 Waterless Urinals (%)</span><input type="number" id="opt-urinals" value="0" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99;" onchange="runCalculations()"></div>
+                    <div class="micro-row"><span class="i18n" data-en="🚽 Waterless Urinals (%)" data-es="🚽 Urinarios Secos (%)">🚽 Waterless Urinals (%)</span><input type="number" id="opt-urinals" value="0" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99; runCalculations();"></div>
                     <div class="micro-row toggle-row"><span class="i18n label-span" data-en="🌧️ Rainwater Harvesting" data-es="🌧️ Agua de Lluvia">🌧️ Rainwater Harvesting</span><label class="switch"><input type="checkbox" id="opt-rain" onchange="runCalculations()"><span class="slider round"></span></label></div>
                     <div class="micro-row toggle-row"><span class="i18n label-span" data-en="🖨️ Pull-Printing (NFC)" data-es="🖨️ Sistema Pull-Printing">🖨️ Pull-Printing (NFC)</span><label class="switch"><input type="checkbox" id="opt-print" onchange="runCalculations()"><span class="slider round"></span></label></div>
                     <div class="micro-row toggle-row"><span class="i18n label-span" data-en="✨ Ozonized Water" data-es="✨ Agua Ozonizada">✨ Ozonized Water</span><label class="switch"><input type="checkbox" id="opt-ozone" onchange="runCalculations()"><span class="slider round"></span></label></div>
@@ -122,9 +122,9 @@
                     <p style="font-size: 0.75rem; color: #4f46e5; margin-bottom: 10px; line-height: 1.2;" class="i18n" data-en="Type a year and the % will auto-fill." data-es="Escribe un año y el % se autocompletará.">Type a year and the % will auto-fill.</p>
                     <div class="ipc-container">
                         <div class="ipc-row">
-                            <input type="number" id="year1" class="year-input" onchange="autoFillIPC(1)" title="Type Year">
+                            <input type="number" id="year1" class="year-input" oninput="autoFillIPC(1)" title="Type Year">
                             <span class="arrow-icon">➡️</span>
-                            <div class="percent-wrapper"><input type="number" id="ipc1" step="0.1" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99;" onchange="runCalculations()"><span>%</span></div>
+                            <div class="percent-wrapper"><input type="number" id="ipc1" step="0.1" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99; runCalculations();"><span>%</span></div>
                         </div>
                     </div>
                 </div>
