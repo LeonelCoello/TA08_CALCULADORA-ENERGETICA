@@ -1,16 +1,16 @@
-# 🌏 ITB EcoCalc | Sustainability & Financial Impact Engine
+# 🌏 ITB EcoCalc | Advanced Sustainability & Financial Impact Engine
 
 ![ITB Header](https://dca.cat/wp-content/uploads/2022/05/ITB_Logo_ITBdesc_800-Direccio-ITB-Alberto-Vila.png)
 
-[![Software Version](https://img.shields.io/badge/Version-3.1.0_Enterprise-059669.svg)](#)
+[![Software Version](https://img.shields.io/badge/Version-4.0.0_Enterprise-059669.svg)](#)
 [![Stack](https://img.shields.io/badge/Stack-Vanilla_JS_/_CSS3_/_HTML5-blue.svg)](#)
 [![Compliance](https://img.shields.io/badge/Rubric-100%25_Verified-success.svg)](#)
 [![Deployment](https://img.shields.io/badge/Live-Demo_Online-orange.svg)](https://leonelcoello.github.io/TA08_CALCULADORA-ENERGETICA/index.html)
 
 ## 🎯 Executive Summary
-**ITB EcoCalc** is a high-fidelity **Digital Twin Simulation Platform** engineered for the *Institut Tecnològic de Barcelona*. Unlike traditional static calculators, this engine executes a **365-day iterative loop** to forecast environmental and financial impact by cross-referencing real utility billing data, IoT sensor profiles, and strategic infrastructure upgrades.
+**ITB EcoCalc** is a high-fidelity **Digital Twin Simulation Platform** engineered for the *Institut Tecnològic de Barcelona*. Moving beyond static spreadsheets, this engine executes a **365-day iterative loop** to forecast environmental and financial impact by cross-referencing real utility billing data, IoT sensor profiles, and strategic infrastructure upgrades.
 
-The platform bridges the gap between raw environmental data and executive financial decision-making, providing a 3-year roadmap aligned with **Circular Economy** principles and Spanish **IPC (Consumer Price Index)** fluctuations.
+The application features a **Dashboard-First architecture**, prioritizing the calculator interface to provide stakeholders with immediate, real-time visual feedback on how Circular Economy principles and Spanish **IPC (Consumer Price Index)** fluctuations affect the operational budget over a 3-year roadmap.
 
 ---
 
@@ -25,20 +25,36 @@ The application is hosted and fully functional at the following URL:
 ### 1. High-Precision Simulation Engine (`app.js`)
 The core logic utilizes a non-linear temporal algorithm to simulate daily consumption patterns:
 * **Temporal Profiles:** The engine distinguishes between `school_day`, `weekend`, `holiday`, and `summer` profiles, adjusting consumption weights for each of the 365 days.
-* **Seasonal Cycling:** * **Thermodynamic Weighting:** Automatic energy spikes during Winter (Nov-Feb) for heating and Summer (May-Jun) for HVAC cooling.
-    * **Hydrological Variance:** Water consumption models scale during high-temperature months (May, June, September).
-* **Compound IPC Algorithm:** Financial projections use compound interest formulas to simulate how 2026-2030 inflation targets affect the operational budget.
+* **Seasonal Thermodynamic Cycling:** Automatic energy spikes during Winter (Nov-Feb) for heating and Summer (May-Jun) for HVAC cooling.
+* **Compound IPC Algorithm:** Financial projections use compound interest formulas to simulate how inflation targets affect the budget up to 2030.
 
-### 2. Strategic "Smart Building" Toggles
-Users can interactively parameterize the institute's physical infrastructure:
-* **Green IT Framework:** Optimized **CPD Nuvulet** sleep cycles, reducing global electrical overhead by 5% through off-peak virtualization management.
-* **Hydraulic Optimization:** Real-time simulation of **Rainwater Harvesting** systems (12% direct water reduction) and automated faucet deployments.
-* **IT Infrastructure Control:** Independent power management for **1,000 workstations and 40 interactive boards**, segmented by morning (AM) and afternoon (PM) shifts.
+### 2. Comprehensive "Smart Building" Toggles
+Users can interactively parameterize the institute's physical infrastructure across 4 dimensions:
+* **⚡ HVAC & Electricity:** * **Passive Insulation:** Solar reflective films reducing summer cooling loads by up to 15%.
+  * **Night Free Cooling:** Automated ventilation systems leveraging nocturnal temperature drops (May-Oct).
+  * **LED Migration & Motion Sensors:** Targeted lighting efficiency.
+* **💧 Hydraulic Optimization:** * **Centralized PRV Valve:** Reducing building water pressure to 3 Bars for a passive 13% saving.
+  * **Waterless Urinals:** Gel-cartridge deployment mapped via sliders (0-100%).
+  * **Rainwater Harvesting:** Direct 12% reduction in grid water dependency.
+* **🖨️ Office & Circular Cleaning:** * **NFC Pull-Printing:** Eliminating "orphan prints" to cut office supply costs by 18%.
+  * **Ozonized Water System:** Drastically reducing chemical cleaning products by 40% with a negligible (+0.5%) electrical offset.
+* **💻 Green IT Framework:** * **CPD Sleep Policies:** Virtualization management for the Nuvulet servers.
+  * **Granular PC Sleep:** Independent power management for 1,000 workstations segmented by AM (8h-14h) and PM (15h-21h) shifts.
 
-### 3. Professional Analytics Dashboard
-* **8-Indicator Matrix:** Simultaneous calculation of Annual vs. Academic Period (Sept-Jul) metrics for Electricity, Water, Maintenance, and Waste Management.
-* **Dual-Axis Visualization:** Dynamic `Chart.js` implementation for multi-unit comparison (kWh vs Liters).
-* **i18n Core:** Full native Internationalization support (English/Spanish) for global stakeholder reporting.
+---
+
+## 📐 Technical Architecture & UI/UX
+
+### Asymmetrical 3-Column Grid System
+The dashboard employs a modern CSS Grid layout designed for real-time data visualization:
+* **Left Panel:** Baseline configurations and overarching strategic goals.
+* **Center Panel:** Dynamic `Chart.js` dual-axis canvas (kWh vs. Liters) and the 3-Year Predictive Matrix.
+* **Right Panel:** Micro-toggles and hardware optimizations, allowing users to tweak parameters and instantly observe the chart's curve flatten.
+
+### Enterprise-Grade Constraints & Responsiveness
+* **Client-Side Data Sanitization:** All percentage inputs feature strict `oninput` boundary constraints, mathematically blocking negative numbers (`<0`) and illogical limits (`>99`) natively in the DOM.
+* **Mobile-First Touch Optimization:** The CSS includes advanced media query breakpoints. On viewports `<1250px`, the 3-column grid gracefully collapses into a stacked layout, with interactive switches and sliders scaling up to ensure ADA-compliant touch targets for mobile and tablet users.
+* **Bespoke Print Engine:** A highly customized `@media print` CSS layer engineered to prevent data clipping, force background color rendering, and utilize an asynchronous JS delay to perfectly re-scale the canvas for DINA4 high-fidelity PDF reporting.
 
 ---
 
@@ -48,35 +64,25 @@ Users can interactively parameterize the institute's physical infrastructure:
 | :--- | :--- | :---: |
 | **8 Key Indicators** | kWh, Liters, Maint €, Waste € (Annual & Academic Period) | ✅ |
 | **Temporal Trends** | Non-linear daily simulation loop (365 iterations) | ✅ |
-| **Seasonal Cycles** | Weighted A/C (Summer) and Heating (Winter) peaks | ✅ |
+| **Seasonal Cycles** | Weighted A/C (Summer), Heating (Winter), and Free Cooling | ✅ |
 | **Expense Categories** | Integrated Maintenance & Waste Management (Escombraries) | ✅ |
 | **3-Year Roadmap** | Interactive Timeline with Circular Economy milestones | ✅ |
-| **Quantification** | Predictive 3-Year Table including IPC & Reduction Goals | ✅ |
-
----
-
-## 📐 Technical Architecture
-
-### UI/UX Design Philosophy
-* **Mobile-First Responsive Design:** Fluid grid layouts that adapt from 4K monitors to handheld devices.
-* **Bespoke Print Engine:** A custom `@media print` CSS layer engineered to prevent data clipping.
-    * *Asynchronous Re-scaling:* The system utilizes a JS-controlled delay to re-render charts for DINA4 high-fidelity PDF output.
-    * *Vector Integrity:* All UI elements maintain 1:1 scale during PDF generation.
+| **Quantification** | Predictive 3-Year Table including IPC & Target Reductions | ✅ |
 
 ---
 
 ## 🚀 Deployment & Usage
 1.  **Environment:** No server-side dependencies. Runs locally in any modern evergreen browser.
-2.  **Simulation:** * Input base monthly consumption from official invoices.
-    * Configure **Strategic Goals** and **Hardware Toggles**.
-    * Set the **IPC Target Year** for automatic inflation adjustment.
+2.  **Simulation:** * Navigate to the **Calculator** tab.
+    * Input base monthly consumption from official invoices.
+    * Toggle Smart Hardware configurations on the right panel and watch the chart adapt.
 3.  **Reporting:** Click **"Generate PDF Report"**. 
-    * *Crucial:* Ensure "Background Graphics" is enabled in the print dialogue to preserve the corporate aesthetic.
+    * *Crucial:* Ensure "Background Graphics" is enabled in your system's print dialogue to preserve the corporate styling.
 
 ---
 
 ## 👤 Credits & Institutional Branding
-**Developed for the ITB Sustainability Task Force Oriol Coll and Leonel Coello**
+**Developed for the ITB Sustainability Task Force Leonel Coello and Oriol Coll.**
 *Institut Tecnològic de Barcelona.*
 
 ---
