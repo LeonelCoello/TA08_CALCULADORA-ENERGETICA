@@ -56,23 +56,35 @@ function runCalculations() {
     const cloudFactor = 1.0 - (cloudVal / 100);
     const timeScale = document.getElementById('timeScale').value;
 
-    // 🟢 MICRO-OPTIMIZACIONES HARDWARE 🟢
+    // 🟢 OPTIMIZACIONES HARDWARE 🟢
     const ledVal = parseFloat(document.getElementById('opt-led').value) || 0;
-    const isMotion = document.getElementById('opt-motion') && document.getElementById('opt-motion').checked;
-    const isWater = document.getElementById('opt-water') && document.getElementById('opt-water').checked;
-    const isHeatEco = document.getElementById('opt-heat') && document.getElementById('opt-heat').checked;
-    const isCoolEco = document.getElementById('opt-cool') && document.getElementById('opt-cool').checked;
-    const isItAm = document.getElementById('opt-it-am') && document.getElementById('opt-it-am').checked;
-    const isItPm = document.getElementById('opt-it-pm') && document.getElementById('opt-it-pm').checked;
-    const isCpd = document.getElementById('opt-cpd') && document.getElementById('opt-cpd').checked;
-    const isRain = document.getElementById('opt-rain') && document.getElementById('opt-rain').checked;
+    const insulationVal = parseFloat(document.getElementById('opt-insulation').value) || 0;
+    const urinalVal = parseFloat(document.getElementById('opt-urinals').value) || 0;
+    
+    const isFreeCool = document.getElementById('opt-freecool').checked;
+    const isMotion = document.getElementById('opt-motion').checked;
+    const isWater = document.getElementById('opt-water').checked;
+    const isPrv = document.getElementById('opt-prv').checked;
+    const isRain = document.getElementById('opt-rain').checked;
+    const isPrint = document.getElementById('opt-print').checked;
+    const isOzone = document.getElementById('opt-ozone').checked;
+    const isHeatEco = document.getElementById('opt-heat').checked;
+    const isCoolEco = document.getElementById('opt-cool').checked;
+    const isItAm = document.getElementById('opt-it-am').checked;
+    const isItPm = document.getElementById('opt-it-pm').checked;
+    const isCpd = document.getElementById('opt-cpd').checked;
 
-    // Matemáticas de ahorro global
+    // Factores globales de ahorro
     const ledFactor = 1.0 - ((ledVal / 100) * 0.12);
     const motionFactor = isMotion ? 0.98 : 1.0; 
-    const smartWaterFactor = isWater ? 0.80 : 1.0; 
     const cpdFactor = isCpd ? 0.95 : 1.0; 
+    const ozoneElecFactor = isOzone ? 1.005 : 1.0; // Sube 0.5% luz
+    const ozoneCleanFactor = isOzone ? 0.60 : 1.0; // Baja 40% limpieza
+    const printFactor = isPrint ? 0.82 : 1.0; // Baja 18% oficina
+    const prvFactor = isPrv ? 0.87 : 1.0; // Baja 13% agua
+    const urinalFactor = 1.0 - ((urinalVal / 100) * 0.10); // Baja 10% agua
     const rainFactor = isRain ? 0.88 : 1.0; 
+    const smartWaterFactor = isWater ? 0.80 : 1.0; 
 
     // Auto-Sleep IT
     let itFactor = 1.0;
@@ -93,13 +105,21 @@ function runCalculations() {
 
         if (profile === 'school_day') { 
             schoolDays++; 
-            if (m === 10 || m === 11 || m === 0 || m === 1) {
+            
+            // Lógica Clima
+            if (m === 10 || m === 11 || m === 0 || m === 1) { // Invierno
                 multE = isHeatEco ? 1.15 : 1.35; 
-            } else if (m === 4 || m === 5) {
+            } else if (m === 4 || m === 5) { // Verano (Mayo-Junio)
                 multE = isCoolEco ? 1.10 : 1.25;
+                // Aplicamos Láminas Solares (solo en meses de refrigeración)
+                multE *= (1.0 - (insulationVal / 100 * 0.15));
             } else {
                 multE = 1.0;
             }
+
+            // Aplicamos Free Cooling (Mayo a Octubre)
+            if (isFreeCool && m >= 4 && m <= 9) multE *= 0.92;
+
             multE *= itFactor; 
             if (m === 4 || m === 5 || m === 8) multW = 1.3; else multW = 1.0;
             
@@ -117,11 +137,11 @@ function runCalculations() {
         baseO += dailyO * multO;
         baseC += dailyC * multC;
 
-        // Cálculos con las reducciones
-        let dE = dailyE * multE * reduce * solarFactor * ledFactor * motionFactor * cpdFactor;
-        let dW = dailyW * multW * reduce * smartWaterFactor * rainFactor;
-        let dO = dailyO * multO * reduce * cloudFactor; 
-        let dC = dailyC * multC * reduce;
+        // Cálculos finales con reducciones
+        let dE = dailyE * multE * reduce * solarFactor * ledFactor * motionFactor * cpdFactor * ozoneElecFactor;
+        let dW = dailyW * multW * reduce * smartWaterFactor * rainFactor * prvFactor * urinalFactor;
+        let dO = dailyO * multO * reduce * cloudFactor * printFactor; 
+        let dC = dailyC * multC * reduce * ozoneCleanFactor;
 
         totals.yearE += dE; totals.yearW += dW; totals.yearO += dO; totals.yearC += dC;
         if (m !== 7) { 
@@ -138,7 +158,6 @@ function runCalculations() {
     if (timeScale === 'month') { divY = 12; divS = 10; suffix = currentLang==='en'?" /mo":" /mes"; }
     if (timeScale === 'day') { divY = 365; divS = schoolDays; suffix = currentLang==='en'?" /day":" /día"; }
 
-    // 🟢 ETIQUETAS ACTUALIZADAS (RÚBRICA) 🟢
     const labels = currentLang === 'en' ? 
         { eY: "Electricity (Annual)", eS: "Electricity (Sept-Jul)", wY: "Water (Annual)", wS: "Water (Sept-Jul)", oY: "Office & Maint. (Annual)", oS: "Office & Maint. (Sept-Jul)", cY: "Clean. & Waste (Annual)", cS: "Clean. & Waste (Sept-Jul)" } :
         { eY: "Electricidad (Anual)", eS: "Electricidad (Set-Jul)", wY: "Agua (Anual)", wS: "Agua (Set-Jul)", oY: "Oficina y Mant. (Anual)", oS: "Oficina y Mant. (Set-Jul)", cY: "Limpieza y Residuos (Anual)", cS: "Limpieza y Residuos (Set-Jul)" };
@@ -154,10 +173,10 @@ function runCalculations() {
         <div class="res-box"><strong>${labels.cS}</strong><br>${formatNum(totals.schoolC/divS)} €${suffix}</div>
     `;
 
-    renderPredictionTable(baseE, baseW, baseO, baseC, reductionVal, solarFactor, cloudFactor, ledFactor, motionFactor, cpdFactor, smartWaterFactor, rainFactor);
+    renderPredictionTable(baseE, baseW, baseO, baseC, reductionVal, solarFactor, cloudFactor, ledFactor, motionFactor, cpdFactor, smartWaterFactor, rainFactor, prvFactor, urinalFactor, printFactor, ozoneElecFactor, ozoneCleanFactor);
 }
 
-function renderPredictionTable(bE, bW, bO, bC, targetRed, solarF, cloudF, ledF, motionF, cpdF, waterF, rainF) {
+function renderPredictionTable(bE, bW, bO, bC, targetRed, solarF, cloudF, ledF, motionF, cpdF, waterF, rainF, prvF, urinalF, printF, ozoneEF, ozoneCF) {
     const tableContainer = document.getElementById('predictionTableContainer');
     
     const y1 = parseInt(document.getElementById('year1').value) || new Date().getFullYear();
@@ -176,25 +195,24 @@ function renderPredictionTable(bE, bW, bO, bC, targetRed, solarF, cloudF, ledF, 
     const r2 = 1 - ((targetRed / 100) * 0.66);
     const r3 = 1 - ((targetRed / 100) * 1.00);
 
-    const finalElecFactor = solarF * ledF * motionF * cpdF;
-    const finalWaterFactor = waterF * rainF;
+    const finalElecFactor = solarF * ledF * motionF * cpdF * ozoneEF;
+    const finalWaterFactor = waterF * rainF * prvF * urinalF;
 
     const costE1 = bE * r1 * finalElecFactor * tElec * i1;
     const costW1 = bW * r1 * finalWaterFactor * tWater * i1;
-    const costO1 = bO * r1 * cloudF * i1;
-    const costC1 = bC * r1 * i1;
+    const costO1 = bO * r1 * cloudF * printF * i1;
+    const costC1 = bC * r1 * ozoneCF * i1;
 
     const costE2 = bE * r2 * finalElecFactor * tElec * i2;
     const costW2 = bW * r2 * finalWaterFactor * tWater * i2;
-    const costO2 = bO * r2 * cloudF * i2;
-    const costC2 = bC * r2 * i2;
+    const costO2 = bO * r2 * cloudF * printF * i2;
+    const costC2 = bC * r2 * ozoneCF * i2;
 
     const costE3 = bE * r3 * finalElecFactor * tElec * i3;
     const costW3 = bW * r3 * finalWaterFactor * tWater * i3;
-    const costO3 = bO * r3 * cloudF * i3;
-    const costC3 = bC * r3 * i3;
+    const costO3 = bO * r3 * cloudF * printF * i3;
+    const costC3 = bC * r3 * ozoneCF * i3;
 
-    // 🟢 ETIQUETAS ACTUALIZADAS PARA LA TABLA 🟢
     const thOffice = currentLang === 'en' ? "📎 Office & Maint. (€)" : "📎 Ofic. y Mant. (€)";
     const thClean = currentLang === 'en' ? "✨ Clean & Waste (€)" : "✨ Limp. y Residuos (€)";
 

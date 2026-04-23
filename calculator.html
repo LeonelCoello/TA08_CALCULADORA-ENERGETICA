@@ -13,8 +13,8 @@
         <div class="nav-container">
             <h1 class="logo">ITB <span class="highlight">EcoCalc</span></h1>
             <nav class="nav-links">
-                <a href="index.html" class="i18n" data-en="Home" data-es="Inicio">Home</a>
                 <a href="calculator.html" class="i18n active" data-en="Calculator" data-es="Calculadora">Calculator</a>
+                <a href="index.html" class="i18n" data-en="About" data-es="Acerca de">About</a>
                 <a href="action-plan.html" class="i18n" data-en="Action Plan" data-es="Plan de Acción">Action Plan</a>
                 <button class="lang-btn" onclick="toggleLang()" id="langBtn">🇪🇸 Español</button>
             </nav>
@@ -22,122 +22,57 @@
     </header>
 
     <main class="container dashboard-layout">
-        <aside class="card params-panel">
-            <h3 class="i18n" data-en="1. Monthly Base Consumption" data-es="1. Consumo Base Mensual">1. Monthly Base Consumption</h3>
-            
-            <div class="input-group"><label class="i18n" data-en="⚡ kWh (Base)" data-es="⚡ kWh (Base)">⚡ kWh (Base)</label><input type="number" id="baseElec" value="16700" onchange="runCalculations()"></div>
-            <div class="input-group"><label class="i18n" data-en="💧 Litres" data-es="💧 Litros">💧 Litres</label><input type="number" id="baseWater" value="150000" onchange="runCalculations()"></div>
-            <div class="input-group"><label class="i18n" data-en="📎 Office & Maint. €" data-es="📎 Oficina y Mant. €">📎 Office & Maint. €</label><input type="number" id="baseOffice" value="473" onchange="runCalculations()"></div>
-            <div class="input-group"><label class="i18n" data-en="✨ Clean. & Waste €" data-es="✨ Limpieza y Residuos €">✨ Clean. & Waste €</label><input type="number" id="baseClean" value="620" onchange="runCalculations()"></div>
+        
+        <aside class="left-panel">
+            <div class="card params-panel">
+                <h3 class="i18n" data-en="1. Monthly Base Consumption" data-es="1. Consumo Base Mensual">1. Monthly Base Consumption</h3>
+                <div class="input-group"><label class="i18n" data-en="⚡ kWh (Base)" data-es="⚡ kWh (Base)">⚡ kWh (Base)</label><input type="number" id="baseElec" value="16700" onchange="runCalculations()"></div>
+                <div class="input-group"><label class="i18n" data-en="💧 Litres" data-es="💧 Litros">💧 Litres</label><input type="number" id="baseWater" value="150000" onchange="runCalculations()"></div>
+                <div class="input-group"><label class="i18n" data-en="📎 Office & Maint. €" data-es="📎 Oficina y Mant. €">📎 Office & Maint. €</label><input type="number" id="baseOffice" value="473" onchange="runCalculations()"></div>
+                <div class="input-group"><label class="i18n" data-en="✨ Clean. & Waste €" data-es="✨ Limpieza y Residuos €">✨ Clean. & Waste €</label><input type="number" id="baseClean" value="620" onchange="runCalculations()"></div>
 
-            <div class="input-group special-box warning-box">
-                <label>💶 <span class="i18n highlight-bold" data-en="Energy & Water Tariffs" data-es="Tarifas de Luz y Agua">Energy & Water Tariffs</span></label>
-                <div class="grid-2-mini">
-                    <div><small>€ / kWh</small><input type="number" id="tariffElec" value="0.15" step="0.01" onchange="runCalculations()"></div>
-                    <div><small>€ / Litre</small><input type="number" id="tariffWater" value="0.002" step="0.001" onchange="runCalculations()"></div>
-                </div>
-            </div>
-
-            <hr style="margin: 20px 0; border: 0; border-top: 1px solid var(--border);">
-
-            <h3 class="i18n" data-en="2. Strategic Goals" data-es="2. Objetivos Estratégicos">2. Strategic Goals</h3>
-
-            <div class="input-group special-box" style="background: #fffbeb; border: 1px dashed #f59e0b; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-                <label>☀️ <span class="i18n highlight-bold" data-en="Solar Panels Expansion" data-es="Expansión Placas Solares" style="color: #d97706;">Solar Panels Expansion</span></label>
-                <p style="font-size: 0.75rem; color: #b45309; margin-bottom: 10px; line-height: 1.3;" class="i18n" data-en="Decreases grid electricity dependency." data-es="Disminuye la dependencia de la red eléctrica del centro.">Decreases grid electricity dependency.</p>
-                <div style="display: flex; align-items: center; background: #ffffff; padding: 6px 12px; border-radius: 6px; border: 1px solid #fde68a;">
-                    <span style="font-size: 0.85rem; color: #b45309; font-weight: bold;" class="i18n" data-en="Capacity Increase:" data-es="Aumento Capacidad:">Capacity Increase:</span>
-                    <div class="percent-wrapper" style="margin-left: auto;">
-                        <input type="number" id="solarPercent" value="20" min="0" max="100" onchange="runCalculations()" style="color: #b45309; width: 60px;"><span>%</span>
+                <div class="input-group special-box warning-box" style="margin-top:15px;">
+                    <label>💶 <span class="i18n highlight-bold" data-en="Energy & Water Tariffs" data-es="Tarifas de Luz y Agua">Energy & Water Tariffs</span></label>
+                    <div class="grid-2-mini">
+                        <div><small>€ / kWh</small><input type="number" id="tariffElec" value="0.15" step="0.01" onchange="runCalculations()"></div>
+                        <div><small>€ / Litre</small><input type="number" id="tariffWater" value="0.002" step="0.001" onchange="runCalculations()"></div>
                     </div>
                 </div>
             </div>
 
-            <div class="input-group special-box" style="background: #f0fdf4; border: 1px dashed #16a34a; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-                <label>☁️ <span class="i18n highlight-bold" data-en="Paperless (Cloud Migration)" data-es="Cero Papel (Digitalización)" style="color: #15803d;">Paperless (Cloud Migration)</span></label>
-                <p style="font-size: 0.75rem; color: #16a34a; margin-bottom: 10px; line-height: 1.3;" class="i18n" data-en="Reduces office supplies cost (paper, toner)." data-es="Reduce el gasto en material de oficina (folios, tóner) migrando a la nube.">Reduces office supplies cost (paper, toner).</p>
-                <div style="display: flex; align-items: center; background: #ffffff; padding: 6px 12px; border-radius: 6px; border: 1px solid #bbf7d0;">
-                    <span style="font-size: 0.85rem; color: #15803d; font-weight: bold;" class="i18n" data-en="Target Reduction:" data-es="Reducción Objetivo:">Target Reduction:</span>
-                    <div class="percent-wrapper" style="margin-left: auto;">
-                        <input type="number" id="cloudPercent" value="15" min="0" max="100" onchange="runCalculations()" style="color: #15803d; width: 60px;"><span>%</span>
+            <div class="card params-panel">
+                <h3 class="i18n" data-en="2. Strategic Goals" data-es="2. Objetivos Estratégicos">2. Strategic Goals</h3>
+
+                <div class="input-group special-box" style="background: #fffbeb; border: 1px dashed #f59e0b; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <label>☀️ <span class="i18n highlight-bold" data-en="Solar Panels Expansion" data-es="Expansión Placas Solares" style="color: #d97706;">Solar Panels Expansion</span></label>
+                    <p style="font-size: 0.75rem; color: #b45309; margin-bottom: 10px; line-height: 1.3;" class="i18n" data-en="Decreases grid electricity dependency." data-es="Disminuye la dependencia de la red eléctrica del centro.">Decreases grid electricity dependency.</p>
+                    <div style="display: flex; align-items: center; background: #ffffff; padding: 6px 12px; border-radius: 6px; border: 1px solid #fde68a;">
+                        <span style="font-size: 0.85rem; color: #b45309; font-weight: bold;" class="i18n" data-en="Capacity Increase:" data-es="Aumento Capacidad:">Capacity Increase:</span>
+                        <div class="percent-wrapper" style="margin-left: auto;">
+                            <input type="number" id="solarPercent" value="20" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99;" onchange="runCalculations()" style="color: #b45309; width: 60px;"><span>%</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="input-group" style="background: var(--primary-light); padding: 15px; border-radius: 8px;">
-                <label>🎯 <span class="i18n highlight-bold" data-en="General Reduction Goal (%)" data-es="Objetivo General Reducción (%)">General Reduction Goal (%)</span></label>
-                <input type="number" id="reductionPercent" value="30" min="0" max="100" onchange="runCalculations()">
-            </div>
-
-            <div class="input-group special-box" style="background: #f8fafc; border: 1px dashed #94a3b8; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-                <label>⚙️ <span class="i18n highlight-bold" data-en="ITB Hardware Optimizations" data-es="Optimizaciones de Hardware ITB" style="color: #475569;">ITB Hardware Optimizations</span></label>
-                <p style="font-size: 0.75rem; color: #64748b; margin-bottom: 10px; line-height: 1.3;" class="i18n" data-en="Toggle smart building systems." data-es="Ajusta los sistemas inteligentes del edificio.">Toggle smart building systems.</p>
-                
-                <div class="micro-toggles-interactive">
-                    <div class="micro-row">
-                        <span class="i18n" data-en="💡 LED Migration (%)" data-es="💡 Migración LED (%)">💡 LED Migration (%)</span>
-                        <input type="number" id="opt-led" value="0" min="0" max="100" onchange="runCalculations()">
-                    </div>
-                    <div class="micro-row toggle-row">
-                        <span class="i18n label-span" data-en="🚶 Motion Lights (10 WC)" data-es="🚶 Sensores Movimiento (10 Baños)">🚶 Motion Lights (10 WC)</span>
-                        <label class="switch"><input type="checkbox" id="opt-motion" onchange="runCalculations()"><span class="slider round"></span></label>
-                    </div>
-                    <div class="micro-row toggle-row">
-                        <span class="i18n label-span" data-en="🚰 Smart Faucets (10 WC)" data-es="🚰 Grifos Inteligentes (10 Baños)">🚰 Smart Faucets (10 WC)</span>
-                        <label class="switch"><input type="checkbox" id="opt-water" onchange="runCalculations()"><span class="slider round"></span></label>
-                    </div>
-                    <div class="micro-row toggle-row" style="background: #e0f2fe; border-color: #7dd3fc;">
-                        <span class="i18n label-span" data-en="🌧️ Rainwater Harvesting (-12% 💧)" data-es="🌧️ Agua de Lluvia (-12% 💧)" style="color: #0369a1; font-weight: 700;">🌧️ Rainwater Harvesting (-12% 💧)</span>
-                        <label class="switch"><input type="checkbox" id="opt-rain" onchange="runCalculations()"><span class="slider round"></span></label>
-                    </div>
-                    <div class="micro-row toggle-row">
-                        <span class="i18n label-span" data-en="🔥 Eco Heating (Nov-Feb)" data-es="🔥 Eco Calefacción (Nov-Feb)">🔥 Eco Heating (Nov-Feb)</span>
-                        <label class="switch"><input type="checkbox" id="opt-heat" onchange="runCalculations()"><span class="slider round"></span></label>
-                    </div>
-                    <div class="micro-row toggle-row">
-                        <span class="i18n label-span" data-en="❄️ Eco Cooling (May-Jun)" data-es="❄️ Eco Aire Acond. (May-Jun)">❄️ Eco Cooling (May-Jun)</span>
-                        <label class="switch"><input type="checkbox" id="opt-cool" onchange="runCalculations()"><span class="slider round"></span></label>
-                    </div>
-                    <div class="micro-row toggle-row">
-                        <span class="i18n label-span" data-en="💻 PC Sleep: Morning (8h-14h)" data-es="💻 Auto-Sleep PC: Mañana (8h-14h)">💻 PC Sleep: Morning (8h-14h)</span>
-                        <label class="switch"><input type="checkbox" id="opt-it-am" onchange="runCalculations()"><span class="slider round"></span></label>
-                    </div>
-                    <div class="micro-row toggle-row">
-                        <span class="i18n label-span" data-en="💻 PC Sleep: Afternoon (15h-21h)" data-es="💻 Auto-Sleep PC: Tarde (15h-21h)">💻 PC Sleep: Afternoon (15h-21h)</span>
-                        <label class="switch"><input type="checkbox" id="opt-it-pm" onchange="runCalculations()"><span class="slider round"></span></label>
-                    </div>
-                    <div class="micro-row toggle-row" style="background: #e0e7ff; border-color: #a5b4fc;">
-                        <span class="i18n label-span" data-en="🖧 Green IT: CPD Night Sleep (-5% ⚡)" data-es="🖧 Green IT: Apagado Noche CPD (-5% ⚡)" style="color: #4338ca; font-weight: 700;">🖧 Green IT: CPD Night Sleep (-5% ⚡)</span>
-                        <label class="switch"><input type="checkbox" id="opt-cpd" onchange="runCalculations()"><span class="slider round"></span></label>
+                <div class="input-group special-box" style="background: #f0fdf4; border: 1px dashed #16a34a; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <label>☁️ <span class="i18n highlight-bold" data-en="Paperless (Cloud Migration)" data-es="Cero Papel (Digitalización)" style="color: #15803d;">Paperless (Cloud Migration)</span></label>
+                    <p style="font-size: 0.75rem; color: #16a34a; margin-bottom: 10px; line-height: 1.3;" class="i18n" data-en="Reduces office supplies cost (paper, toner)." data-es="Reduce el gasto en material de oficina (folios, tóner) migrando a la nube.">Reduces office supplies cost (paper, toner).</p>
+                    <div style="display: flex; align-items: center; background: #ffffff; padding: 6px 12px; border-radius: 6px; border: 1px solid #bbf7d0;">
+                        <span style="font-size: 0.85rem; color: #15803d; font-weight: bold;" class="i18n" data-en="Target Reduction:" data-es="Reducción Objetivo:">Target Reduction:</span>
+                        <div class="percent-wrapper" style="margin-left: auto;">
+                            <input type="number" id="cloudPercent" value="15" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99;" onchange="runCalculations()" style="color: #15803d; width: 60px;"><span>%</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="input-group special-box info-box">
-                <label>📈 <span class="i18n highlight-bold" data-en="Smart IPC Inflation" data-es="Inflación IPC Inteligente">Smart IPC Inflation</span></label>
-                <p style="font-size: 0.75rem; color: #4f46e5; margin-bottom: 10px; line-height: 1.2;" class="i18n" data-en="Type a year and the % will auto-fill." data-es="Escribe un año y el % se autocompletará.">Type a year and the % will auto-fill.</p>
-                <div class="ipc-container">
-                    <div class="ipc-row">
-                        <input type="number" id="year1" class="year-input" onchange="autoFillIPC(1)" title="Type Year">
-                        <span class="arrow-icon">➡️</span>
-                        <div class="percent-wrapper"><input type="number" id="ipc1" step="0.1" onchange="runCalculations()"><span>%</span></div>
-                    </div>
+                <div class="input-group" style="background: var(--primary-light); padding: 15px; border-radius: 8px;">
+                    <label>🎯 <span class="i18n highlight-bold" data-en="General Reduction Goal (%)" data-es="Objetivo General Reducción (%)">General Reduction Goal (%)</span></label>
+                    <input type="number" id="reductionPercent" value="30" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99;" onchange="runCalculations()">
                 </div>
             </div>
-
-            <div class="input-group" style="margin-top: 20px;">
-                <label class="i18n" data-en="Time Scale (Indicators)" data-es="Escala Tiempo (Indicadores)">Time Scale (Indicators)</label>
-                <select id="timeScale" onchange="runCalculations()">
-                    <option value="year" class="i18n" data-en="Yearly" data-es="Anual">Yearly</option>
-                    <option value="month" class="i18n" data-en="Monthly" data-es="Mensual">Monthly</option>
-                    <option value="day" class="i18n" data-en="Daily" data-es="Diario">Daily</option>
-                </select>
-            </div>
-
-            <button class="btn-pdf" onclick="exportToPDF()">📄 <span class="i18n" data-en="Generate PDF Report" data-es="Generar Informe PDF">Generate PDF Report</span></button>
         </aside>
 
-        <section class="results-area">
+        <section class="results-area center-panel">
             <div class="print-only print-header">
                 <img src="https://dca.cat/wp-content/uploads/2022/05/ITB_Logo_ITBdesc_800-Direccio-ITB-Alberto-Vila.png" alt="ITB Logo">
                 <h2 class="i18n" data-en="ITB Sustainability Official Report" data-es="ITB - Informe Oficial de Sostenibilidad">ITB Sustainability Official Report</h2>
@@ -152,12 +87,111 @@
                 <div id="resultsGrid" class="grid-2"></div>
             </div>
 
-            <div class="card" style="margin-top: 20px;">
+            <div class="card">
                 <h3 class="i18n highlight-bold" data-en="🔮 3-Year Cost Prediction (€)" data-es="🔮 Predicción de Costes a 3 Años (€)" style="font-size: 1.2rem; margin-bottom: 5px;">🔮 3-Year Cost Prediction (€)</h3>
                 <p class="text-small i18n" data-en="Simulates progressive cost inflation (IPC) vs resource reduction. Evaluates final cost in Euros." data-es="Simula la inflación progresiva del IPC frente a la reducción de recursos. Evalúa el coste final en Euros.">Simulates progressive cost inflation (IPC) vs resource reduction. Evaluates final cost in Euros.</p>
                 <div id="predictionTableContainer" class="table-responsive"></div>
             </div>
         </section>
+
+        <aside class="right-panel">
+            <div class="card params-panel special-box" style="background: #f8fafc; border: 1px dashed #94a3b8; padding: 25px;">
+                <label style="font-size: 1.1rem;">⚙️ <span class="i18n highlight-bold" data-en="ITB Hardware Optimizations" data-es="Optimizaciones de Hardware ITB" style="color: #475569;">ITB Hardware Optimizations</span></label>
+                <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 15px; line-height: 1.4;" class="i18n" data-en="Configure smart building parameters and watch the chart update." data-es="Configura los parámetros del edificio inteligente y observa el gráfico.">Configure smart building parameters and watch the chart update.</p>
+                
+                <div class="micro-toggles-interactive">
+                    <div class="micro-row">
+                        <span class="i18n" data-en="💡 LED Migration (%)" data-es="💡 Migración LED (%)">💡 LED Migration (%)</span>
+                        <input type="number" id="opt-led" value="0" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99;" onchange="runCalculations()">
+                    </div>
+                    <div class="micro-row">
+                        <span class="i18n" data-en="🌡️ Passive Insulation (%)" data-es="🌡️ Láminas Solares (%)">🌡️ Passive Insulation (%)</span>
+                        <input type="number" id="opt-insulation" value="0" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99;" onchange="runCalculations()">
+                    </div>
+                    <div class="micro-row toggle-row">
+                        <span class="i18n label-span" data-en="🌀 Night Free Cooling" data-es="🌀 Free Cooling Nocturno">🌀 Night Free Cooling</span>
+                        <label class="switch"><input type="checkbox" id="opt-freecool" onchange="runCalculations()"><span class="slider round"></span></label>
+                    </div>
+                    <div class="micro-row toggle-row">
+                        <span class="i18n label-span" data-en="🚶 Motion Lights (WC)" data-es="🚶 Sensores Movimiento">🚶 Motion Lights (WC)</span>
+                        <label class="switch"><input type="checkbox" id="opt-motion" onchange="runCalculations()"><span class="slider round"></span></label>
+                    </div>
+
+                    <div class="micro-row toggle-row">
+                        <span class="i18n label-span" data-en="🚰 Smart Faucets" data-es="🚰 Grifos Inteligentes">🚰 Smart Faucets</span>
+                        <label class="switch"><input type="checkbox" id="opt-water" onchange="runCalculations()"><span class="slider round"></span></label>
+                    </div>
+                    <div class="micro-row toggle-row">
+                        <span class="i18n label-span" data-en="📉 PRV Valve (3 Bars)" data-es="📉 Reductora Presión (3B)">📉 PRV Valve (3 Bars)</span>
+                        <label class="switch"><input type="checkbox" id="opt-prv" onchange="runCalculations()"><span class="slider round"></span></label>
+                    </div>
+                    <div class="micro-row">
+                        <span class="i18n" data-en="🚽 Waterless Urinals (%)" data-es="🚽 Urinarios Secos (%)">🚽 Waterless Urinals (%)</span>
+                        <input type="number" id="opt-urinals" value="0" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99;" onchange="runCalculations()">
+                    </div>
+                    <div class="micro-row toggle-row">
+                        <span class="i18n label-span" data-en="🌧️ Rainwater Harvesting" data-es="🌧️ Agua de Lluvia">🌧️ Rainwater Harvesting</span>
+                        <label class="switch"><input type="checkbox" id="opt-rain" onchange="runCalculations()"><span class="slider round"></span></label>
+                    </div>
+
+                    <div class="micro-row toggle-row">
+                        <span class="i18n label-span" data-en="🖨️ Pull-Printing (NFC)" data-es="🖨️ Sistema Pull-Printing">🖨️ Pull-Printing (NFC)</span>
+                        <label class="switch"><input type="checkbox" id="opt-print" onchange="runCalculations()"><span class="slider round"></span></label>
+                    </div>
+                    <div class="micro-row toggle-row">
+                        <span class="i18n label-span" data-en="✨ Ozonized Water" data-es="✨ Agua Ozonizada">✨ Ozonized Water</span>
+                        <label class="switch"><input type="checkbox" id="opt-ozone" onchange="runCalculations()"><span class="slider round"></span></label>
+                    </div>
+
+                    <div class="micro-row toggle-row">
+                        <span class="i18n label-span" data-en="🔥 Eco Heat (Nov-Feb)" data-es="🔥 Eco Calefac. (Nov-Feb)">🔥 Eco Heat (Nov-Feb)</span>
+                        <label class="switch"><input type="checkbox" id="opt-heat" onchange="runCalculations()"><span class="slider round"></span></label>
+                    </div>
+                    <div class="micro-row toggle-row">
+                        <span class="i18n label-span" data-en="❄️ Eco Cool (May-Jun)" data-es="❄️ Eco Aire A. (May-Jun)">❄️ Eco Cool (May-Jun)</span>
+                        <label class="switch"><input type="checkbox" id="opt-cool" onchange="runCalculations()"><span class="slider round"></span></label>
+                    </div>
+                    <div class="micro-row toggle-row">
+                        <span class="i18n label-span" data-en="💻 PC Sleep (AM)" data-es="💻 Auto-Sleep PC (Mañana)">💻 PC Sleep (AM)</span>
+                        <label class="switch"><input type="checkbox" id="opt-it-am" onchange="runCalculations()"><span class="slider round"></span></label>
+                    </div>
+                    <div class="micro-row toggle-row">
+                        <span class="i18n label-span" data-en="💻 PC Sleep (PM)" data-es="💻 Auto-Sleep PC (Tarde)">💻 PC Sleep (PM)</span>
+                        <label class="switch"><input type="checkbox" id="opt-it-pm" onchange="runCalculations()"><span class="slider round"></span></label>
+                    </div>
+                    <div class="micro-row toggle-row" style="background: #e0e7ff; border-color: #a5b4fc;">
+                        <span class="i18n label-span" data-en="🖧 Green IT CPD Sleep" data-es="🖧 Green IT: Apagado CPD" style="color: #4338ca; font-weight: 700;">🖧 Green IT CPD Sleep</span>
+                        <label class="switch"><input type="checkbox" id="opt-cpd" onchange="runCalculations()"><span class="slider round"></span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card params-panel">
+                <div class="input-group special-box info-box" style="margin-bottom: 20px;">
+                    <label>📈 <span class="i18n highlight-bold" data-en="Smart IPC Inflation" data-es="Inflación IPC Inteligente">Smart IPC Inflation</span></label>
+                    <p style="font-size: 0.75rem; color: #4f46e5; margin-bottom: 10px; line-height: 1.2;" class="i18n" data-en="Type a year and the % will auto-fill." data-es="Escribe un año y el % se autocompletará.">Type a year and the % will auto-fill.</p>
+                    <div class="ipc-container">
+                        <div class="ipc-row">
+                            <input type="number" id="year1" class="year-input" onchange="autoFillIPC(1)" title="Type Year">
+                            <span class="arrow-icon">➡️</span>
+                            <div class="percent-wrapper"><input type="number" id="ipc1" step="0.1" min="0" max="99" oninput="if(this.value<0)this.value=0;if(this.value>99)this.value=99;" onchange="runCalculations()"><span>%</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="i18n" data-en="Time Scale (Indicators)" data-es="Escala Tiempo (Indicadores)">Time Scale (Indicators)</label>
+                    <select id="timeScale" onchange="runCalculations()">
+                        <option value="year" class="i18n" data-en="Yearly" data-es="Anual">Yearly</option>
+                        <option value="month" class="i18n" data-en="Monthly" data-es="Mensual">Monthly</option>
+                        <option value="day" class="i18n" data-en="Daily" data-es="Diario">Daily</option>
+                    </select>
+                </div>
+
+                <button class="btn-pdf" onclick="exportToPDF()">📄 <span class="i18n" data-en="Generate PDF Report" data-es="Generar Informe PDF">Generate PDF Report</span></button>
+            </div>
+        </aside>
+
     </main>
     <script src="js/app.js"></script>
 </body>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITB Sustainability Dashboard</title>
+    <title>About - ITB EcoCalc</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -11,12 +11,14 @@
     <header class="navbar">
         <div class="nav-container">
             <h1 class="logo">ITB <span class="highlight">EcoCalc</span></h1>
+            
             <nav class="nav-links">
-                <a href="index.html" class="i18n active" data-en="Home" data-es="Inicio">Home</a>
                 <a href="calculator.html" class="i18n" data-en="Calculator" data-es="Calculadora">Calculator</a>
+                <a href="index.html" class="i18n active" data-en="About" data-es="Acerca de">About</a>
                 <a href="action-plan.html" class="i18n" data-en="Action Plan" data-es="Plan de Acción">Action Plan</a>
                 <button class="lang-btn" onclick="toggleLang()" id="langBtn">🇪🇸 Español</button>
             </nav>
+
         </div>
     </header>
 
@@ -30,14 +32,13 @@
                 Advanced analytics tool designed for Institut Tecnològic de Barcelona. Cross-reference real sensor data, utility invoices, and strategic reduction goals to forecast 3-year economic impact and carbon footprint mitigation.
             </p>
             
-            <div class="data-sources">
+            <div class="data-sources" style="margin-bottom: 10px;">
                 <div class="source-box pro-pill"><span class="emoji">💧</span> <span class="i18n" data-en="Live Water Sensors" data-es="Sensores de Agua">Live Water Sensors</span></div>
                 <div class="source-box pro-pill"><span class="emoji" style="opacity: 0.7;">📄</span> <span class="i18n" data-en="Lyreco Invoices" data-es="Facturas Lyreco">Lyreco Invoices</span></div>
                 <div class="source-box pro-pill"><span class="emoji">☀️</span> <span class="i18n" data-en="Solar Projections" data-es="Proyección Solar">Solar Projections</span></div>
                 <div class="source-box pro-pill"><span class="emoji" style="opacity: 0.7;">☁️</span> <span class="i18n" data-en="Cloud Transition" data-es="Transición Cloud">Cloud Transition</span></div>
             </div>
-
-            <a href="calculator.html" class="btn-primary btn-glow i18n" data-en="Launch Calculator" data-es="Iniciar Calculadora">Launch Calculator</a>
+            
         </div>
     </main>
     <script src="js/app.js"></script>
