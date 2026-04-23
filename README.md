@@ -73,16 +73,16 @@ The dashboard employs a modern CSS Grid layout designed for real-time data visua
 
 ## 🚀 Deployment & Usage
 1.  **Environment:** No server-side dependencies. Runs locally in any modern evergreen browser.
-2.  **Simulation:** * Navigate to the **Calculator** tab.
-    * Input base monthly consumption from official invoices.
-    * Toggle Smart Hardware configurations on the right panel and watch the chart adapt.
+2.  **Simulation:** * Open `index.html` (The Main Calculator Dashboard).
+    * Input base monthly consumption from official invoices on the left panel.
+    * Toggle Smart Hardware configurations on the right panel and watch the central chart adapt.
 3.  **Reporting:** Click **"Generate PDF Report"**. 
     * *Crucial:* Ensure "Background Graphics" is enabled in your system's print dialogue to preserve the corporate styling.
 
 ---
 
 ## 👤 Credits & Institutional Branding
-**Developed for the ITB Sustainability Task Force Leonel Coello and Oriol Coll.**
+**Developed for the ITB Sustainability Task Force Leonel Coello And Oriol Coll.**
 *Institut Tecnològic de Barcelona.*
 
 ---
