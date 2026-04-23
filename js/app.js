@@ -47,7 +47,6 @@ function runCalculations() {
     const dailyO = parseFloat(document.getElementById('baseOffice').value) / 30;
     const dailyC = parseFloat(document.getElementById('baseClean').value) / 30;
     
-    // Variables generales
     const reductionVal = parseFloat(document.getElementById('reductionPercent').value) || 0;
     const reduce = 1.0 - (reductionVal / 100);
     const solarVal = parseFloat(document.getElementById('solarPercent').value) || 0;
@@ -56,37 +55,34 @@ function runCalculations() {
     const cloudFactor = 1.0 - (cloudVal / 100);
     const timeScale = document.getElementById('timeScale').value;
 
-    // 🟢 OPTIMIZACIONES HARDWARE 🟢
     const ledVal = parseFloat(document.getElementById('opt-led').value) || 0;
     const insulationVal = parseFloat(document.getElementById('opt-insulation').value) || 0;
     const urinalVal = parseFloat(document.getElementById('opt-urinals').value) || 0;
     
-    const isFreeCool = document.getElementById('opt-freecool').checked;
-    const isMotion = document.getElementById('opt-motion').checked;
-    const isWater = document.getElementById('opt-water').checked;
-    const isPrv = document.getElementById('opt-prv').checked;
-    const isRain = document.getElementById('opt-rain').checked;
-    const isPrint = document.getElementById('opt-print').checked;
-    const isOzone = document.getElementById('opt-ozone').checked;
-    const isHeatEco = document.getElementById('opt-heat').checked;
-    const isCoolEco = document.getElementById('opt-cool').checked;
-    const isItAm = document.getElementById('opt-it-am').checked;
-    const isItPm = document.getElementById('opt-it-pm').checked;
-    const isCpd = document.getElementById('opt-cpd').checked;
+    const isFreeCool = document.getElementById('opt-freecool') && document.getElementById('opt-freecool').checked;
+    const isMotion = document.getElementById('opt-motion') && document.getElementById('opt-motion').checked;
+    const isWater = document.getElementById('opt-water') && document.getElementById('opt-water').checked;
+    const isPrv = document.getElementById('opt-prv') && document.getElementById('opt-prv').checked;
+    const isRain = document.getElementById('opt-rain') && document.getElementById('opt-rain').checked;
+    const isPrint = document.getElementById('opt-print') && document.getElementById('opt-print').checked;
+    const isOzone = document.getElementById('opt-ozone') && document.getElementById('opt-ozone').checked;
+    const isHeatEco = document.getElementById('opt-heat') && document.getElementById('opt-heat').checked;
+    const isCoolEco = document.getElementById('opt-cool') && document.getElementById('opt-cool').checked;
+    const isItAm = document.getElementById('opt-it-am') && document.getElementById('opt-it-am').checked;
+    const isItPm = document.getElementById('opt-it-pm') && document.getElementById('opt-it-pm').checked;
+    const isCpd = document.getElementById('opt-cpd') && document.getElementById('opt-cpd').checked;
 
-    // Factores globales de ahorro
     const ledFactor = 1.0 - ((ledVal / 100) * 0.12);
     const motionFactor = isMotion ? 0.98 : 1.0; 
     const cpdFactor = isCpd ? 0.95 : 1.0; 
-    const ozoneElecFactor = isOzone ? 1.005 : 1.0; // Sube 0.5% luz
-    const ozoneCleanFactor = isOzone ? 0.60 : 1.0; // Baja 40% limpieza
-    const printFactor = isPrint ? 0.82 : 1.0; // Baja 18% oficina
-    const prvFactor = isPrv ? 0.87 : 1.0; // Baja 13% agua
-    const urinalFactor = 1.0 - ((urinalVal / 100) * 0.10); // Baja 10% agua
+    const ozoneElecFactor = isOzone ? 1.005 : 1.0;
+    const ozoneCleanFactor = isOzone ? 0.60 : 1.0;
+    const printFactor = isPrint ? 0.82 : 1.0;
+    const prvFactor = isPrv ? 0.87 : 1.0;
+    const urinalFactor = 1.0 - ((urinalVal / 100) * 0.10);
     const rainFactor = isRain ? 0.88 : 1.0; 
     const smartWaterFactor = isWater ? 0.80 : 1.0; 
 
-    // Auto-Sleep IT
     let itFactor = 1.0;
     if (isItAm) itFactor -= 0.04; 
     if (isItPm) itFactor -= 0.04; 
@@ -105,24 +101,17 @@ function runCalculations() {
 
         if (profile === 'school_day') { 
             schoolDays++; 
-            
-            // Lógica Clima
-            if (m === 10 || m === 11 || m === 0 || m === 1) { // Invierno
+            if (m === 10 || m === 11 || m === 0 || m === 1) { 
                 multE = isHeatEco ? 1.15 : 1.35; 
-            } else if (m === 4 || m === 5) { // Verano (Mayo-Junio)
+            } else if (m === 4 || m === 5) { 
                 multE = isCoolEco ? 1.10 : 1.25;
-                // Aplicamos Láminas Solares (solo en meses de refrigeración)
                 multE *= (1.0 - (insulationVal / 100 * 0.15));
             } else {
                 multE = 1.0;
             }
-
-            // Aplicamos Free Cooling (Mayo a Octubre)
             if (isFreeCool && m >= 4 && m <= 9) multE *= 0.92;
-
             multE *= itFactor; 
             if (m === 4 || m === 5 || m === 8) multW = 1.3; else multW = 1.0;
-            
         } else if (profile === 'weekend') {
             multE = 0.15; multW = 0.05; multO = 0; multC = 0;
         } else if (profile === 'holiday') {
@@ -131,13 +120,11 @@ function runCalculations() {
             multE = 0.25; multW = 0.1; multO = 0.05; multC = 0.1;
         }
 
-        // Base pura
         baseE += dailyE * multE;
         baseW += dailyW * multW;
         baseO += dailyO * multO;
         baseC += dailyC * multC;
 
-        // Cálculos finales con reducciones
         let dE = dailyE * multE * reduce * solarFactor * ledFactor * motionFactor * cpdFactor * ozoneElecFactor;
         let dW = dailyW * multW * reduce * smartWaterFactor * rainFactor * prvFactor * urinalFactor;
         let dO = dailyO * multO * reduce * cloudFactor * printFactor; 
@@ -152,7 +139,9 @@ function runCalculations() {
         currentDate.setDate(currentDate.getDate() + 1);
     }
 
-    renderChart(monthlyE, monthlyW);
+    if(document.getElementById('myChart')) {
+        renderChart(monthlyE, monthlyW);
+    }
 
     let divY = 1, divS = 1, suffix = "";
     if (timeScale === 'month') { divY = 12; divS = 10; suffix = currentLang==='en'?" /mo":" /mes"; }
@@ -162,23 +151,25 @@ function runCalculations() {
         { eY: "Electricity (Annual)", eS: "Electricity (Sept-Jul)", wY: "Water (Annual)", wS: "Water (Sept-Jul)", oY: "Office & Maint. (Annual)", oS: "Office & Maint. (Sept-Jul)", cY: "Clean. & Waste (Annual)", cS: "Clean. & Waste (Sept-Jul)" } :
         { eY: "Electricidad (Anual)", eS: "Electricidad (Set-Jul)", wY: "Agua (Anual)", wS: "Agua (Set-Jul)", oY: "Oficina y Mant. (Anual)", oS: "Oficina y Mant. (Set-Jul)", cY: "Limpieza y Residuos (Anual)", cS: "Limpieza y Residuos (Set-Jul)" };
 
-    document.getElementById('resultsGrid').innerHTML = `
-        <div class="res-box"><strong>${labels.eY}</strong><br>${formatNum(totals.yearE/divY)} kWh${suffix}</div>
-        <div class="res-box"><strong>${labels.eS}</strong><br>${formatNum(totals.schoolE/divS)} kWh${suffix}</div>
-        <div class="res-box"><strong>${labels.wY}</strong><br>${formatNum(totals.yearW/divY)} L${suffix}</div>
-        <div class="res-box"><strong>${labels.wS}</strong><br>${formatNum(totals.schoolW/divS)} L${suffix}</div>
-        <div class="res-box"><strong>${labels.oY}</strong><br>${formatNum(totals.yearO/divY)} €${suffix}</div>
-        <div class="res-box"><strong>${labels.oS}</strong><br>${formatNum(totals.schoolO/divS)} €${suffix}</div>
-        <div class="res-box"><strong>${labels.cY}</strong><br>${formatNum(totals.yearC/divY)} €${suffix}</div>
-        <div class="res-box"><strong>${labels.cS}</strong><br>${formatNum(totals.schoolC/divS)} €${suffix}</div>
-    `;
-
-    renderPredictionTable(baseE, baseW, baseO, baseC, reductionVal, solarFactor, cloudFactor, ledFactor, motionFactor, cpdFactor, smartWaterFactor, rainFactor, prvFactor, urinalFactor, printFactor, ozoneElecFactor, ozoneCleanFactor);
+    if(document.getElementById('resultsGrid')) {
+        document.getElementById('resultsGrid').innerHTML = `
+            <div class="res-box"><strong>${labels.eY}</strong><br>${formatNum(totals.yearE/divY)} kWh${suffix}</div>
+            <div class="res-box"><strong>${labels.eS}</strong><br>${formatNum(totals.schoolE/divS)} kWh${suffix}</div>
+            <div class="res-box"><strong>${labels.wY}</strong><br>${formatNum(totals.yearW/divY)} L${suffix}</div>
+            <div class="res-box"><strong>${labels.wS}</strong><br>${formatNum(totals.schoolW/divS)} L${suffix}</div>
+            <div class="res-box"><strong>${labels.oY}</strong><br>${formatNum(totals.yearO/divY)} €${suffix}</div>
+            <div class="res-box"><strong>${labels.oS}</strong><br>${formatNum(totals.schoolO/divS)} €${suffix}</div>
+            <div class="res-box"><strong>${labels.cY}</strong><br>${formatNum(totals.yearC/divY)} €${suffix}</div>
+            <div class="res-box"><strong>${labels.cS}</strong><br>${formatNum(totals.schoolC/divS)} €${suffix}</div>
+        `;
+        renderPredictionTable(baseE, baseW, baseO, baseC, reductionVal, solarFactor, cloudFactor, ledFactor, motionFactor, cpdFactor, smartWaterFactor, rainFactor, prvFactor, urinalFactor, printFactor, ozoneElecFactor, ozoneCleanFactor);
+    }
 }
 
 function renderPredictionTable(bE, bW, bO, bC, targetRed, solarF, cloudF, ledF, motionF, cpdF, waterF, rainF, prvF, urinalF, printF, ozoneEF, ozoneCF) {
     const tableContainer = document.getElementById('predictionTableContainer');
-    
+    if(!tableContainer) return;
+
     const y1 = parseInt(document.getElementById('year1').value) || new Date().getFullYear();
     const y2 = y1 + 1;
     const y3 = y1 + 2;
